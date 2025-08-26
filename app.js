@@ -1,8 +1,8 @@
 const express =require('express');
 const app= new express();
 const router =require('./src/route/api');
-const bodyParser = require('body-parser');
-
+//const bodyParser = require('body-parser');
+require('dotenv').config();
 //Security Middleware Lib Import
 const rateLimit =require('express-rate-limit');
 const helmet =require('helmet');
@@ -35,7 +35,7 @@ app.use(limiter);
 // app.use(express.json());
 // app.use(express.urlencoded({limit:'50mb', extended: true }));
 
-let URL="mongodb+srv://mezbaur2004:Proxima1@cluster0.vkg0b.mongodb.net/FULKOPI"
+let URL=process.env.URL;
 let option={user:'',pass:"",autoIndex:true};
 mongoose.connect(URL,option).then((res)=>{
     console.log("Database Connected")
