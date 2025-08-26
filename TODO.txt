@@ -1,0 +1,9 @@
+1. npm init --y -> Package.json-> BackEnd
+2.app.js ->BackEnd Config
+3.index.js ->Complete Project Run
+4.src ->BackEnd -> controller/middleware/utility
+5.client-> FrontEnd->File Folder
+6.app.js->Structure->connect dist & connect route
+7.index.js->Run backend
+8.run dev->run production
+9.prepare backend file folder and capabilities
