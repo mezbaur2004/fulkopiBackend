@@ -6,6 +6,7 @@ const DataSchema=mongoose.Schema({
     price:{type:Number,required:true},
     discount:{type:Boolean,required:true},
     discountPrice:{type:Number},
+    status:{type:Boolean,required:true},
     image:{type:String,required:true},
     stock:{type:Boolean,required:true},
     remarks:{type:String,required:true},
