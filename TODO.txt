@@ -7,3 +7,8 @@
 7.index.js->Run backend
 8.run dev->run production
 9.prepare backend file folder and capabilities
+
+
+1. User: Registration, Login, ReadProfile, UpdateProfile
+2. Product: BrandList, CategoryList, ProductList--> with good dummy data that are associated with each other
+3. 
