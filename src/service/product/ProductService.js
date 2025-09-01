@@ -44,6 +44,7 @@ const ProductListService=async (req,productModel)=>{
             {$match:{"category.status":true}},
             {
                 $project: {
+                    _id:1,
                     title: 1,
                     price: 1,
                     discount: 1,
@@ -72,7 +73,7 @@ const ListByBrandService=async (req,productModel)=>{
         let BrandStatusCheck={$match:{"brand.status":true}}
         let UnwindCategoryStage={$unwind:'$category'}
         let CategoryStatusCheck={$match:{"category.status":true}}
-        let ProjectionStage={$project:{_id:0, categoryID: 0,brandID:0, 'brand._id':0,'category._id':0}}
+        let ProjectionStage={$project:{categoryID: 0,brandID:0, 'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
             MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage,BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck,ProjectionStage
         ])
@@ -92,7 +93,7 @@ const ListByCategoryService=async (req,productModel)=>{
         let BrandStatusCheck={$match:{"brand.status":true}}
         let UnwindCategoryStage={$unwind:'$category'}
         let CategoryStatusCheck={$match:{"category.status":true}}
-        let ProjectionStage={$project:{_id:0, categoryID: 0,brandID:0, 'brand._id':0,'category._id':0}}
+        let ProjectionStage={$project:{categoryID: 0,brandID:0, 'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
             MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage, BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck,ProjectionStage
         ])
@@ -113,7 +114,7 @@ const ListByKeywordService=async (req,productModel)=>{
         let BrandStatusCheck={$match:{"brand.status":true}}
         let UnwindCategoryStage={$unwind:'$category'}
         let CategoryStatusCheck={$match:{"category.status":true}}
-        let ProjectionStage={$project:{_id:0, categoryID: 0,brandID:0, 'brand._id':0,'category._id':0}}
+        let ProjectionStage={$project:{categoryID: 0,brandID:0, 'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
             MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage,BrandStatusCheck,UnwindCategoryStage,CategoryStatusCheck,ProjectionStage
         ])
@@ -134,7 +135,7 @@ const ListByRemarkService=async (req,productModel)=>{
         let BrandStatusCheck={$match:{"brand.status":true}}
         let UnwindCategoryStage={$unwind:'$category'}
         let CategoryStatusCheck={$match:{"category.status":true}}
-        let ProjectionStage={$project:{_id:0,brandID:0,categoryID:0,'brand._id':0,'category._id':0}}
+        let ProjectionStage={$project:{brandID:0,categoryID:0,'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
             MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage, BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck,ProjectionStage
         ])
@@ -154,7 +155,7 @@ const ProductDetailsService=async (req,productModel)=>{
         let BrandStatusCheck={$match:{"brand.status":true}}
         let UnwindCategoryStage={$unwind:'$category'}
         let CategoryStatusCheck={$match:{"category.status":true}}
-        let ProjectionStage={$project:{_id:0,brandID:0,categoryID:0,'brand._id':0,'category._id':0}}
+        let ProjectionStage={$project:{brandID:0,categoryID:0,'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
             MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage, BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck, ProjectionStage
         ])
