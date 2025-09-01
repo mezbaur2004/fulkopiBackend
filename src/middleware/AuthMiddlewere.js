@@ -8,8 +8,8 @@ module.exports=async (req,res,next)=>{
         if(err){
             res.status(401).json({status:"unauthorized",data:err.message});
         }else{
-            let email=decoded.data.email;
-            req.headers.email=email;
+            req.headers.email = decoded.email;
+            req.headers.user_id = decoded.user_id;
             next();
         }
     })
