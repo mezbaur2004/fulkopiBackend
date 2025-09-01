@@ -3,13 +3,15 @@ const AuthMiddlewere=require('../middleware/AuthMiddlewere');
 const userController=require('../controller/user/userController');
 const productController=require('../controller/product/productController');
 const wishListController=require('../controller/wish/wishListController');
+const cartListController=require('../controller/cart/cartListController');
+
 const router=express.Router();
 
 //User
 router.post("/registration",userController.Registration);
-router.get("/login",userController.Login);
+router.post("/login",userController.Login);
 router.get("/profileDetails",AuthMiddlewere,userController.profileDetails);
-router.post("/profileUpdate",AuthMiddlewere,userController.updateProfile);
+router.put("/profileUpdate",AuthMiddlewere,userController.updateProfile);
 
 //Product
 router.get("/brandList",productController.brandList);
@@ -24,7 +26,14 @@ router.get('/productDetails/:id',productController.productDetails);
 //Wish
 router.post('/addWishList',AuthMiddlewere,wishListController.AddWishList);
 router.get('/wishList',AuthMiddlewere,wishListController.WishList);
-router.get('/removeWish',AuthMiddlewere,wishListController.RemoveWishList)
+router.delete('/removeWish',AuthMiddlewere,wishListController.RemoveWishList);
+
+//Cart
+router.post('/addCartList',AuthMiddlewere,cartListController.AddCartList);
+router.get('/cartList',AuthMiddlewere,cartListController.CartList);
+router.put('/updateCart/:cartID',AuthMiddlewere,cartListController.UpdateCartList)
+router.delete('/removeCart',AuthMiddlewere,cartListController.RemoveCartList);
+
 
 
 

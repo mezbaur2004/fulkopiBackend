@@ -12,8 +12,16 @@ const WishListService=async (req,wishModel)=>{
         let JoinWithCategoryStage={$lookup:{from:"categories", localField:'product.categoryID',foreignField:'_id', as: 'category'}}
         let UnwindCategoryStage={$unwind:'$category'}
         let CategoryStatusCheck={$match:{"category.status":true}}
-
-        let data=await wishModel.aggregate([MatchStage,JoinWithProductStage,UnwindProduct,ProductStatusCheck,JoinWithBrandStage,UnwindBrandStage,BrandStatusCheck,JoinWithCategoryStage,UnwindCategoryStage,CategoryStatusCheck]);
+        let ProjectionStage={$project:{
+                'userID':0,'product._id':0,
+                'product.categoryID':0,'product.brandID':0,
+                'brand._id':0,'category._id':0,
+                "product.createdAt": 0,
+                "product.updatedAt": 0,
+                "brand.createdAt": 0,
+                "category.createdAt": 0,
+            }}
+        let data=await wishModel.aggregate([MatchStage,JoinWithProductStage,UnwindProduct,ProductStatusCheck,JoinWithBrandStage,UnwindBrandStage,BrandStatusCheck,JoinWithCategoryStage,UnwindCategoryStage,CategoryStatusCheck, ProjectionStage]);
         return {status:"success",data:data};
     }catch (error){
         return {status:"failed", data:error.toString()}
