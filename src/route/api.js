@@ -4,6 +4,7 @@ const userController=require('../controller/user/userController');
 const productController=require('../controller/product/productController');
 const wishListController=require('../controller/wish/wishListController');
 const cartListController=require('../controller/cart/cartListController');
+const invoiceController=require('../controller/invoice/invoiceController');
 
 const router=express.Router();
 
@@ -34,7 +35,11 @@ router.get('/cartList',AuthMiddlewere,cartListController.CartList);
 router.put('/updateCart/:cartID',AuthMiddlewere,cartListController.UpdateCartList)
 router.delete('/removeCart',AuthMiddlewere,cartListController.RemoveCartList);
 
-
+//Invoice
+router.post('/createInvoice',AuthMiddlewere,invoiceController.CreateInvoice);
+router.post('/PaymentSuccess/:trxID',AuthMiddlewere,invoiceController.PaymentSuccess)
+router.post('/PaymentCancel/:trxID',AuthMiddlewere,invoiceController.PaymentCancel)
+router.post('/PaymentFail/:trxID',AuthMiddlewere,invoiceController.PaymentFail)
 
 
 module.exports=router;
