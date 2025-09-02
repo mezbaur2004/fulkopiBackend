@@ -11,4 +11,5 @@
 
 1. User: Registration, Login, ReadProfile, UpdateProfile
 2. Product: BrandList, CategoryList, ProductList--> with good dummy data that are associated with each other
-3. 
+3. Wish and Cart: CRUD
+4. Invoice: CreateInvoice, InvoiceList, InvoiceProductList
