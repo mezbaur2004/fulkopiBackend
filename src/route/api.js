@@ -37,9 +37,9 @@ router.delete('/removeCart',AuthMiddlewere,cartListController.RemoveCartList);
 
 //Invoice
 router.post('/createInvoice',AuthMiddlewere,invoiceController.CreateInvoice);
-router.post('/PaymentSuccess/:trxID',AuthMiddlewere,invoiceController.PaymentSuccess)
-router.post('/PaymentCancel/:trxID',AuthMiddlewere,invoiceController.PaymentCancel)
-router.post('/PaymentFail/:trxID',AuthMiddlewere,invoiceController.PaymentFail)
+router.post('/PaymentSuccess/:trxID',AuthMiddlewere,invoiceController.PaymentSuccess);
+router.post('/PaymentCancel/:trxID',AuthMiddlewere,invoiceController.PaymentCancel);
+router.post('/PaymentFail/:trxID',AuthMiddlewere,invoiceController.PaymentFail);
 
 
 module.exports=router;
