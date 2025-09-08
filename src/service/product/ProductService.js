@@ -155,7 +155,7 @@ const ProductDetailsService=async (req,productModel)=>{
         let BrandStatusCheck={$match:{"brand.status":true}}
         let UnwindCategoryStage={$unwind:'$category'}
         let CategoryStatusCheck={$match:{"category.status":true}}
-        let ProjectionStage={$project:{brandID:0,categoryID:0,'brand._id':0,'category._id':0}}
+        let ProjectionStage={$project:{'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
             MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage, BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck, ProjectionStage
         ])
