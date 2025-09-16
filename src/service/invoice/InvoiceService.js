@@ -104,7 +104,7 @@ const CreateInvoiceService=async (req)=>{
             "https://sandbox.sslcommerz.com/gwprocess/v4/api.php",
             qs.stringify(paymentData),{headers:{ "Content-Type": "application/x-www-form-urlencoded" }}
         );
-
+        await cartModel.deleteMany({ userID: user_id });
         return sslResponse.data;
     }catch(error){
         return {status:"failed", data:error.toString()}
@@ -115,8 +115,8 @@ const CreateInvoiceService=async (req)=>{
 
 const PaymentFailService=async(req)=>{
     try{
-        let trxID=req.params.trxID;
-        await invoiceModel.updateOne({tran_id:trxID},{paymentStatus:"fail"});
+        let {tran_id}=req.body
+        await invoiceModel.updateOne({tran_id:tran_id},{paymentStatus:"fail"});
 
         return {status:"fail"}
     }catch(error){
@@ -126,8 +126,8 @@ const PaymentFailService=async(req)=>{
 
 const PaymentCancelService=async(req)=>{
     try{
-        let trxID=req.params.trxID;
-        await invoiceModel.updateOne({tran_id:trxID},{paymentStatus:"cancel"});
+        let {tran_id}=req.body
+        await invoiceModel.updateOne({tran_id:tran_id},{paymentStatus:"cancel"});
 
         return {status:"cancel"}
     }catch(error){
@@ -135,10 +135,21 @@ const PaymentCancelService=async(req)=>{
     }
 }
 
+const PaymentIPNService=async(req)=>{
+    try{
+        let {tran_id}=req.body;
+        let {status}=req.body;
+        await invoiceModel.updateOne({tran_id:tran_id},{paymentStatus:status});
+        return {status:"success"}
+    }catch (e){
+        return {status:"fail", message:"Something went wrong"};
+    }
+}
+
 const PaymentSuccessService=async(req)=>{
     try{
-        let trxID=req.params.trxID;
-        await invoiceModel.updateOne({tran_id:trxID},{paymentStatus:"success"});
+        let {tran_id}=req.body
+        await invoiceModel.updateOne({tran_id:tran_id},{paymentStatus:"success"});
 
         return {status:"success"}
     }catch(error){
@@ -146,4 +157,30 @@ const PaymentSuccessService=async(req)=>{
     }
 }
 
-module.exports = {CreateInvoiceService, PaymentFailService, PaymentCancelService, PaymentSuccessService};
+const InvoiceListService=async(req)=>{
+    try{
+        const user_id=new mongoose.Types.ObjectId(req.headers.user_id);
+        let result=await invoiceModel.find({userID:user_id});
+        return {status:"success", data:result};
+    }catch (error){
+        return {status:"failed", data:error.toString()}
+    }
+}
+
+const InvoiceProductListService=async(req)=>{
+    try{
+        //const user_id=new mongoose.Types.ObjectId(req.headers.user_id);
+        const invoice_id=new mongoose.Types.ObjectId(req.params.invoice_id);
+        let MatchStage={$match:{invoiceID:invoice_id}}
+        let JoinWithProductStage={$lookup:{from:"products", localField:"productID",foreignField:"_id",as:"product"}};
+        let UnwindStage={$unwind:"$product"}
+        //console.log(user_id,invoice_id);
+        let data=await invoiceProductModel.aggregate([MatchStage,JoinWithProductStage,UnwindStage]);
+
+        return {status:"success", data:data};
+    }catch (error){
+        return {status:"failed", data:error.toString()}
+    }
+}
+
+module.exports = {CreateInvoiceService, PaymentFailService, PaymentCancelService, PaymentSuccessService, PaymentIPNService, InvoiceListService, InvoiceProductListService};

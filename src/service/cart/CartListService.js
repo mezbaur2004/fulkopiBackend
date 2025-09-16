@@ -29,17 +29,32 @@ const CartListService=async (req,cartModel)=>{
     }
 }
 
-const AddCartListService=async (req,cartModel)=>{
-    try{
-        let user_id=req.headers.user_id
-        let reqBody=req.body
-        reqBody.userID=user_id;
-        await cartModel.create(reqBody);
-        return {status:"success",message:"Product added to cart"};
-    }catch (error){
-        return {status:"failed", data:error.toString()}
+const AddCartListService = async (req, cartModel) => {
+    try {
+        let user_id = req.headers.user_id;
+        let { productID, qty } = req.body;
+
+        // Ensure qty is at least 1
+        qty = qty && qty > 0 ? qty : 1;
+
+        // Check if product already exists in cart
+        let existingCartItem = await cartModel.findOne({ userID: user_id, productID });
+
+        if (existingCartItem) {
+            // If exists, increment qty
+            existingCartItem.qty += qty;
+            await existingCartItem.save();
+            return { status: "success", message: "Product quantity updated in cart" };
+        } else {
+            // Else, create new item
+            await cartModel.create({ userID: user_id, productID, qty });
+            return { status: "success", message: "Product added to cart" };
+        }
+    } catch (error) {
+        return { status: "failed", data: error.toString() };
     }
-}
+};
+
 
 const UpdateCartListService=async (req,cartModel)=>{
     try{
