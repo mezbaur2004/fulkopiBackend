@@ -11,11 +11,28 @@ require('dotenv').config();
 const PORT=process.env.PORT;
 const generateTranId = () => "INV_" + Date.now();
 
-const CreateInvoiceService=async (req)=>{
+const CreateInvoiceService=async (req,res)=>{
     try{
         const user_id=new mongoose.Types.ObjectId(req.headers.user_id)
         const cus_email=req.headers.email
-        const {cus_name,cus_location,cus_city,cus_phone,cus_postcode}=req.body;
+        const { cus_name, cus_location, cus_city, cus_phone, cus_postcode } = req.body;
+
+        if (!cus_name) {
+            return { status: "fail", message: "Customer name is required" };
+        }
+        if (!cus_location) {
+            return { status: "fail", message: "Customer location is required" };
+        }
+        if (!cus_city) {
+            return { status: "fail", message: "Customer city is required" };
+        }
+        if (!cus_phone) {
+            return { status: "fail", message: "Customer phone is required" };
+        }
+        if (!cus_postcode) {
+            return { status: "fail", message: "Customer postcode is required" };
+        }
+
         const deliveryCharge=110;
         const cartItems=await cartModel.find({userID:user_id});
         if(!cartItems.length){
@@ -99,7 +116,6 @@ const CreateInvoiceService=async (req)=>{
             cus_postcode:cus_postcode,
             cus_country: "Bangladesh"
         };
-
         const sslResponse = await axios.post(
             "https://sandbox.sslcommerz.com/gwprocess/v4/api.php",
             qs.stringify(paymentData),{headers:{ "Content-Type": "application/x-www-form-urlencoded" }}
