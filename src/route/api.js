@@ -30,16 +30,19 @@ router.get('/wishList',AuthMiddlewere,wishListController.WishList);
 router.delete('/removeWish',AuthMiddlewere,wishListController.RemoveWishList);
 
 //Cart
-router.post('/addCartList',AuthMiddlewere,cartListController.AddCartList);
+router.post('/addToCart',AuthMiddlewere,cartListController.AddCartList);
 router.get('/cartList',AuthMiddlewere,cartListController.CartList);
 router.put('/updateCart/:cartID',AuthMiddlewere,cartListController.UpdateCartList)
 router.delete('/removeCart',AuthMiddlewere,cartListController.RemoveCartList);
 
 //Invoice
 router.post('/createInvoice',AuthMiddlewere,invoiceController.CreateInvoice);
-router.post('/PaymentSuccess/:trxID',AuthMiddlewere,invoiceController.PaymentSuccess);
-router.post('/PaymentCancel/:trxID',AuthMiddlewere,invoiceController.PaymentCancel);
-router.post('/PaymentFail/:trxID',AuthMiddlewere,invoiceController.PaymentFail);
 
+router.post('/PaymentSuccess',invoiceController.PaymentSuccess);
+router.post('/PaymentCancel',invoiceController.PaymentCancel);
+router.post('/PaymentFail',invoiceController.PaymentFail);
+router.post('/PaymentIPN',invoiceController.paymentIPN);
 
+router.get('/InvoiceList',AuthMiddlewere,invoiceController.invoiceList);
+router.get('/InvoiceProductList/:invoice_id',AuthMiddlewere,invoiceController.invoiceProductList);
 module.exports=router;
