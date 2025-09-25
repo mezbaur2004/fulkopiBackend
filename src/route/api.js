@@ -13,6 +13,7 @@ router.post("/registration",userController.Registration);
 router.post("/login",userController.Login);
 router.get("/profileDetails",AuthMiddlewere,userController.profileDetails);
 router.put("/profileUpdate",AuthMiddlewere,userController.updateProfile);
+router.post("/google",userController.googleUser);
 
 //Product
 router.get("/brandList",productController.brandList);
@@ -22,7 +23,7 @@ router.get('/listByBrand/:brandID',productController.listByBrand);
 router.get('/listByCategory/:categoryID',productController.listByCategory);
 router.get('/listByKeyword/:keyword',productController.listByKeyword);
 router.get('/listByRemark/:remarks',productController.listByRemark);
-router.get('/productDetails/:id',productController.productDetails);
+router.get('/productDetails/:slug',productController.productDetails);
 
 //Wish
 router.post('/addWishList',AuthMiddlewere,wishListController.AddWishList);
@@ -45,4 +46,7 @@ router.post('/PaymentIPN',invoiceController.paymentIPN);
 
 router.get('/InvoiceList',AuthMiddlewere,invoiceController.invoiceList);
 router.get('/InvoiceProductList/:invoice_id',AuthMiddlewere,invoiceController.invoiceProductList);
+
+
+
 module.exports=router;

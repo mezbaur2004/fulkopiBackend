@@ -3,6 +3,7 @@ const UserCreateService=require('../../service/user/UserCreateService');
 const UserLoginService=require('../../service/user/UserLoginService');
 const UserDetailsService=require('../../service/user/UserDetailsService');
 const UserUpdateService=require('../../service/user/UserUpdateService');
+const GoogleUserService = require("../../service/user/GoogleUserService");
 
 exports.Registration=async (req,res)=>{
     let result=await UserCreateService(req,userModel);
@@ -21,5 +22,10 @@ exports.profileDetails=async (req,res)=>{
 
 exports.updateProfile=async (req,res)=>{
     let result=await UserUpdateService(req,userModel);
+    res.status(200).json(result);
+}
+
+exports.googleUser=async (req,res)=>{
+    let result=await GoogleUserService(req,userModel);
     res.status(200).json(result);
 }
