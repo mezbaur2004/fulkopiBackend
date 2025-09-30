@@ -1,14 +1,34 @@
-const mongoose=require("mongoose")
+const mongoose = require("mongoose");
 
-const DataSchema=mongoose.Schema({
-    email:{type:String,required:true,unique:true},
-    firstName:{type:String,required:true},
-    lastName:{type:String,required:true},
-    mobile:{type:String},
-    password:{type:String,required:true},
-    photo:{type:String},
-    createdDate:{type:Date,default:Date.now},
-},{versionKey:false});
+const UserSchema = new mongoose.Schema(
+    {
+        email: { type: String, required: true, unique: true },
 
-const UserModel=mongoose.model('users',DataSchema);
-module.exports=UserModel;
+        // Local user
+        password: {
+            type: String,
+            required: function() {
+                return this.provider === "local";
+            }
+        },
+        firstName: { type: String, required: true },
+        lastName: { type: String },
+        photo: { type: String },
+        mobile: { type: String },
+        // Google user
+        googleId: {
+            type: String,
+            required: function() {
+                return this.provider === "google";
+            }
+        },
+        // Meta
+        provider: { type: String, enum: ["local", "google"], required: true },
+        // 🔑 Role (new)
+        role: { type: String, enum: ["user", "admin"], default: "user",},
+    },
+    { timestamps: true, versionKey: false }
+);
+
+const UserModel = mongoose.model("users", UserSchema);
+module.exports = UserModel;
