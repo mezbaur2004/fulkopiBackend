@@ -9,7 +9,7 @@ const UserLoginService=async (req,userModel)=>{
         if(user.password !== req.body.password){
             return{status:401,message:"Incorrect password"};
         }
-        let token=CreateToken({email:user.email, user_id:user._id});
+        let token=CreateToken({email:user.email, user_id:user._id, role:user.role});
 
         return {status:200,token:token, data:user};
     }catch(error){

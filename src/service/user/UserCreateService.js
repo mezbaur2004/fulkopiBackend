@@ -9,7 +9,7 @@ const UserCreateService=async (req,UserModel)=>{
         if(!MobileRegx.test(mobile)){
             return{status:"fail",data:"Invalid mobile number"};
         }
-        let PostBody=req.body;
+        let PostBody = { ...req.body, provider: "local" };
         let data=await UserModel.create(PostBody);
         return {status:"success",data:data};
     }catch(error){
