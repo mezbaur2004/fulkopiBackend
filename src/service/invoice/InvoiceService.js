@@ -176,7 +176,7 @@ const PaymentSuccessService=async(req)=>{
 const InvoiceListService=async(req)=>{
     try{
         const user_id=new mongoose.Types.ObjectId(req.headers.user_id);
-        let result=await invoiceModel.find({userID:user_id});
+        let result=await invoiceModel.find({userID:user_id}).sort({ createdAt: -1 });
         return {status:"success", data:result};
     }catch (error){
         return {status:"failed", data:error.toString()}
