@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const UserListService = async (UserModel) => {
     try {
         const users = await UserModel.find({}, "-password") // don’t send passwords
@@ -9,8 +11,18 @@ const UserListService = async (UserModel) => {
     }
 };
 
-// services/InvoiceListService.js
-const UserInvoiceListService = async (InvoiceModel, UserModel) => {
+
+const OneUserInvoiceService = async (req, InvoiceModel) => {
+    try {
+        const { id } = req.params;
+        const invoices = await InvoiceModel.find({ userID: id }).sort({ createdAt: -1 });
+        return { status: "success", data: invoices };
+    } catch (error) {
+        return { status: "failed", data: error.toString() };
+    }
+}
+
+const UserInvoiceListService = async (InvoiceModel) => {
     try {
         let data = await InvoiceModel.aggregate([
             {
@@ -48,5 +60,36 @@ const UserInvoiceListService = async (InvoiceModel, UserModel) => {
     }
 };
 
-module.exports = {UserListService, UserInvoiceListService};
+const InvoiceProductListService = async (req, InvoiceProductModel) => {
+    try {
+        const { id } = req.params;
+
+        //Validate ObjectId
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return { status: "failed", data: "Invalid invoice_id" };
+        }
+
+        const data = await InvoiceProductModel.aggregate([
+            {
+                $match: { invoiceID: new mongoose.Types.ObjectId(id) }
+            },
+            {
+                $lookup: {
+                    from: "products", // collection name in db
+                    localField: "productID",
+                    foreignField: "_id",
+                    as: "product"
+                }
+            },
+            { $unwind: "$product" } // flatten the product array
+        ]);
+
+        return { status: "success", data: data };
+    } catch (error) {
+        return { status: "failed", data: error.toString() };
+    }
+};
+
+
+module.exports = {UserListService, OneUserInvoiceService, UserInvoiceListService, InvoiceProductListService};
 

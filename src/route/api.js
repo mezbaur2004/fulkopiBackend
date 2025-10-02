@@ -51,18 +51,29 @@ router.post('/PaymentIPN',invoiceController.paymentIPN);
 router.get('/InvoiceList',AuthMiddleware,invoiceController.invoiceList);
 router.get('/InvoiceProductList/:invoice_id',AuthMiddleware,invoiceController.invoiceProductList);
 
-router.post('/productCreate',AuthMiddleware,AdminMiddleware,productCreateUpdateController.productCreate);
-router.put('/productUpdate/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.productUpdate);
 
 //Admin Dashboard
 
+router.get('/adminProductList',AuthMiddleware,AdminMiddleware,productCreateUpdateController.productList);
+router.get('/adminProductDetails/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.singleProduct);
+router.post('/productCreate',AuthMiddleware,AdminMiddleware,productCreateUpdateController.productCreate);
+router.put('/productUpdate/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.productUpdate);
+
+router.get('/adminBrandList',AuthMiddleware,AdminMiddleware,productCreateUpdateController.brandList);
+router.get('/adminBrandDetails/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.singleBrand);
 router.post('/BrandCreate',AuthMiddleware,AdminMiddleware,productCreateUpdateController.brandCreate);
 router.put('/BrandUpdate/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.brandUpdate);
 
+router.get('/adminCategoryList',AuthMiddleware,AdminMiddleware,productCreateUpdateController.categoryList);
+router.get('/adminCategoryDetails/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.singleCategory);
 router.post('/CategoryCreate',AuthMiddleware,AdminMiddleware,productCreateUpdateController.categoryCreate);
 router.put('/CategoryUpdate/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.categoryUpdate);
 
 router.get('/userList',AuthMiddleware,AdminMiddleware,userInvoiceController.userList);
+router.get('/oneUserInvoiceList/:id',AuthMiddleware,AdminMiddleware,userInvoiceController.oneUserInvoiceList);
+
 router.get('/userInvoiceList',AuthMiddleware,AdminMiddleware,userInvoiceController.userInvoiceList);
+router.get('/invoiceProducts/:id',AuthMiddleware,AdminMiddleware,userInvoiceController.invoiceProductList);
 
 module.exports=router;
+

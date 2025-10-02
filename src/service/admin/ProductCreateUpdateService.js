@@ -1,5 +1,53 @@
 // services/ProductService.js
-const slugify = require("slugify"); // install this: npm i slugify
+const slugify = require("slugify");
+const mongoose = require("mongoose"); // install this: npm i slugify
+
+const ProductListService = async (req, productModel) => {
+    try {
+        let data = await productModel.aggregate([
+            {
+                $lookup: {
+                    from: 'brands',
+                    localField: 'brandID',
+                    foreignField: '_id',
+                    as: 'brand'
+                }
+            },
+            { $unwind: '$brand' },
+            {
+                $lookup: {
+                    from: 'categories',
+                    localField: 'categoryID',
+                    foreignField: '_id',
+                    as: 'category'
+                }
+            },
+            { $unwind: '$category' },
+            { $sort: { createdAt: -1 } } // newest first
+
+        ]);
+
+        return { status: "success", data: data };
+    } catch (error) {
+        return { status: "failed", data: error.toString() };
+    }
+}
+
+const SingleProduct = async (req, productModel) => {
+    try {
+        const id=new mongoose.Types.ObjectId(req.params.id);
+        let MatchStage={$match:{_id:id}}
+        let JoinWithBrand={$lookup:{from: 'brands', localField: 'brandID', foreignField: '_id', as: 'brand'}};
+        let UnwindBrandStage={$unwind:'$brand'};
+        let JoinWithCategory={$lookup:{from:'categories', localField: 'categoryID', foreignField: '_id', as: 'category'}};
+        let UnwindCategoryStage={$unwind:'$brand'};
+        let data = await productModel.aggregate([MatchStage, JoinWithBrand, UnwindBrandStage, JoinWithCategory, UnwindCategoryStage]);
+        return { status: "success", data: data };
+    }catch (error) {
+        return { status: "failed", data: error.toString() };
+    }
+}
+
 
 const ProductCreateService = async (req, ProductModel) => {
     try {
@@ -17,8 +65,18 @@ const ProductCreateService = async (req, ProductModel) => {
             brandID,
         } = req.body;
 
-        // Simple validation
-        if (!title || !des || !price || !status || !image || !stock || !remarks || !categoryID || !brandID) {
+
+        if (
+            title === undefined || title === null ||
+            des === undefined || des === null ||
+            price === undefined || price === null ||
+            status === undefined || status === null ||
+            image === undefined || image === null ||
+            stock === undefined || stock === null ||
+            remarks === undefined || remarks === null ||
+            categoryID === undefined || categoryID === null ||
+            brandID === undefined || brandID === null
+        ) {
             return { status: "failed", data: "All required fields must be provided" };
         }
 
@@ -79,7 +137,25 @@ const ProductUpdateService = async (req, ProductModel) => {
     }
 };
 
-// ===== CREATE BRAND =====
+const BrandListService=async (req, brandModel)=>{
+    try {
+        let data=await brandModel.find().sort({ createdAt: -1 });
+        return {status:"success",data:data};
+    }catch (error) {
+        return {status:"failed", data:error.toString()};
+    }
+}
+
+const SingleBrand = async (req, brandModel) => {
+    try {
+        const {id}=req.params;
+        let data = await brandModel.findOne({_id:id});
+        return { status: "success", data: data };
+    }catch (error) {
+        return { status: "failed", data: error.toString() };
+    }
+}
+
 const BrandCreateService = async (req, BrandModel) => {
     try {
         const { brandName, status, brandImg } = req.body;
@@ -104,7 +180,7 @@ const BrandCreateService = async (req, BrandModel) => {
     }
 };
 
-// ===== UPDATE BRAND =====
+
 const BrandUpdateService = async (req, BrandModel) => {
     try {
         const { id } = req.params;
@@ -132,7 +208,26 @@ const BrandUpdateService = async (req, BrandModel) => {
     }
 };
 
-// ===== CREATE Cat =====
+const CategoryListService=async (req,categoryModel)=>{
+    try {
+        let data=await categoryModel.find().sort({ createdAt: -1 });
+        return {status:"success",data:data};
+    }catch (error) {
+        return {status:"failed", data:error.toString()};
+    }
+}
+
+
+const SingleCategory = async (req, categoryModel) => {
+    try {
+        const {id}=req.params;
+        let data = await categoryModel.findOne({_id:id});
+        return { status: "success", data: data };
+    }catch (error) {
+        return { status: "failed", data: error.toString() };
+    }
+}
+
 const CategoryCreateService = async (req, CategoryModel) => {
     try {
         const { categoryName, status, categoryImg } = req.body;
@@ -189,5 +284,5 @@ const CategoryUpdateService = async (req, CategoryModel) => {
 
 
 module.exports = {
-    ProductCreateService, ProductUpdateService, BrandCreateService, BrandUpdateService, CategoryCreateService, CategoryUpdateService
+    ProductListService, SingleProduct, ProductCreateService, ProductUpdateService, BrandListService, SingleBrand, BrandCreateService, BrandUpdateService, CategoryListService, SingleCategory, CategoryCreateService, CategoryUpdateService
 };
