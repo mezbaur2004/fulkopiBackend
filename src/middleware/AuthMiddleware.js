@@ -26,7 +26,6 @@ const AuthMiddleware=(req, res, next)=> {
 // Admin authentication middleware
 const AdminMiddleware=(req, res, next)=> {
     if (req.headers.role !== "admin") {
-        console.log(req.headers.role);
         return res.status(403).json({ status: "forbidden", data: "Admin access required" });
     }
     next();

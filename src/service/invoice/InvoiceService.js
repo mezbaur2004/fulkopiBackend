@@ -185,12 +185,10 @@ const InvoiceListService=async(req)=>{
 
 const InvoiceProductListService=async(req)=>{
     try{
-        //const user_id=new mongoose.Types.ObjectId(req.headers.user_id);
         const invoice_id=new mongoose.Types.ObjectId(req.params.invoice_id);
         let MatchStage={$match:{invoiceID:invoice_id}}
         let JoinWithProductStage={$lookup:{from:"products", localField:"productID",foreignField:"_id",as:"product"}};
         let UnwindStage={$unwind:"$product"}
-        //console.log(user_id,invoice_id);
         let data=await invoiceProductModel.aggregate([MatchStage,JoinWithProductStage,UnwindStage]);
 
         return {status:"success", data:data};
