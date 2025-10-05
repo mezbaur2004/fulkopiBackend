@@ -46,6 +46,7 @@ const ProductListService=async (req,productModel)=>{
                 $project: {
                     _id:1,
                     title: 1,
+                    slug: 1,
                     price: 1,
                     discount: 1,
                     discountPrice: 1,
@@ -147,8 +148,8 @@ const ListByRemarkService=async (req,productModel)=>{
 
 const ProductDetailsService=async (req,productModel)=>{
     try {
-        let id=new mongoose.Types.ObjectId(req.params.id);
-        let MatchStage={$match:{_id:id,status:true}};
+        let {slug}=req.params;
+        let MatchStage={$match:{slug:slug,status:true}};
         let JoinWithBrandStage={$lookup:{from:'brands', localField:'brandID',foreignField: '_id', as:"brand"}}
         let JoinWithCategoryStage={$lookup:{from:'categories',localField: 'categoryID',foreignField: '_id', as:"category"}}
         let UnwindBrandStage={$unwind:'$brand'}
