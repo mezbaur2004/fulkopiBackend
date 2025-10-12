@@ -7,7 +7,10 @@ const invoiceController=require('../controller/invoice/invoiceController');
 const productCreateUpdateController=require('../controller/admin/ProductCreateUpdateController')
 const productUpdateUpdateController = require("../controller/admin/ProductCreateUpdateController");
 const userInvoiceController=require('../controller/admin/UserInvoiceController');
-const {AuthMiddleware, AdminMiddleware} = require("../middleware/AuthMiddleware");
+const {AuthMiddleware, AdminMiddleware, ValidationMiddleware} = require("../middleware/Middlewares");
+const {ProductValidator} = require("../validators/ProductValidator");
+const {BrandValidator} = require("../validators/BrandValidator");
+const {CategoryValidator} = require("../validators/CategoryValidator");
 
 
 const router=express.Router();
@@ -56,18 +59,18 @@ router.get('/InvoiceProductList/:invoice_id',AuthMiddleware,invoiceController.in
 
 router.get('/adminProductList',AuthMiddleware,AdminMiddleware,productCreateUpdateController.productList);
 router.get('/adminProductDetails/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.singleProduct);
-router.post('/productCreate',AuthMiddleware,AdminMiddleware,productCreateUpdateController.productCreate);
-router.put('/productUpdate/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.productUpdate);
+router.post('/productCreate',AuthMiddleware,AdminMiddleware,ProductValidator,ValidationMiddleware,productCreateUpdateController.productCreate);
+router.put('/productUpdate/:id',AuthMiddleware,AdminMiddleware,ProductValidator,ValidationMiddleware,productUpdateUpdateController.productUpdate);
 
 router.get('/adminBrandList',AuthMiddleware,AdminMiddleware,productCreateUpdateController.brandList);
 router.get('/adminBrandDetails/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.singleBrand);
-router.post('/BrandCreate',AuthMiddleware,AdminMiddleware,productCreateUpdateController.brandCreate);
-router.put('/BrandUpdate/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.brandUpdate);
+router.post('/BrandCreate',AuthMiddleware,AdminMiddleware,BrandValidator,ValidationMiddleware,productCreateUpdateController.brandCreate);
+router.put('/BrandUpdate/:id',AuthMiddleware,AdminMiddleware,BrandValidator,ValidationMiddleware,productUpdateUpdateController.brandUpdate);
 
 router.get('/adminCategoryList',AuthMiddleware,AdminMiddleware,productCreateUpdateController.categoryList);
 router.get('/adminCategoryDetails/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.singleCategory);
-router.post('/CategoryCreate',AuthMiddleware,AdminMiddleware,productCreateUpdateController.categoryCreate);
-router.put('/CategoryUpdate/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.categoryUpdate);
+router.post('/CategoryCreate',AuthMiddleware,AdminMiddleware,CategoryValidator,ValidationMiddleware,productCreateUpdateController.categoryCreate);
+router.put('/CategoryUpdate/:id',AuthMiddleware,AdminMiddleware,CategoryValidator,ValidationMiddleware,productUpdateUpdateController.categoryUpdate);
 
 router.get('/userList',AuthMiddleware,AdminMiddleware,userInvoiceController.userList);
 router.get('/oneUserInvoiceList/:id',AuthMiddleware,AdminMiddleware,userInvoiceController.oneUserInvoiceList);

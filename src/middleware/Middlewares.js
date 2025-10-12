@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
+const {validationResult}=require('express-validator');
 const jwtKey = process.env.JWT_KEY;
 
 // User authentication middleware
-const AuthMiddleware=(req, res, next)=> {
+const Middlewares=(req, res, next)=> {
     const token = req.headers['token'];
     if (!token) {
         return res.status(401).json({ status: "unauthorized", data: "No token provided" });
@@ -31,4 +32,15 @@ const AdminMiddleware=(req, res, next)=> {
     next();
 }
 
-module.exports = {AuthMiddleware,AdminMiddleware};
+const ValidationMiddleware=(req, res, next)=> {
+    const errors=validationResult(req);
+    if(!errors.isEmpty()) {
+        return res.status(400).json({
+            status: "failed",
+            error: errors.array().map(e => e.msg),
+        });
+    }
+    next();
+}
+
+module.exports = {AuthMiddleware: Middlewares,AdminMiddleware,ValidationMiddleware};
