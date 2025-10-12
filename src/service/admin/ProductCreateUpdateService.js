@@ -1,9 +1,13 @@
-// services/ProductService.js
 const slugify = require("slugify");
-const mongoose = require("mongoose"); // install this: npm i slugify
+const mongoose = require("mongoose");
+
 
 const ProductListService = async (req, productModel) => {
     try {
+        let limit=Number(req.query.limit) ||10;
+        let page=Number(req.query.page) ||1;
+        let skip=(page-1)*limit;
+        let total= await productModel.countDocuments();
         let data = await productModel.aggregate([
             {
                 $lookup: {
@@ -23,15 +27,30 @@ const ProductListService = async (req, productModel) => {
                 }
             },
             { $unwind: '$category' },
-            { $sort: { createdAt: -1 } } // newest first
+            { $sort: { createdAt: -1 }
+            }, // newest first
+            {$skip:skip},
+            {$limit:limit},
 
         ]);
+        // let loop=[] //performance test-1
+        // for (let i = 0; i < 10000; i++) {
+        //     loop[i]=data;
+        // }
 
-        return { status: "success", data: data };
+        return { status: "success", data: data,
+            pagination: {
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit)
+            }
+        };
     } catch (error) {
         return { status: "failed", data: error.toString() };
     }
 }
+
 
 const SingleProduct = async (req, productModel) => {
     try {
@@ -65,25 +84,6 @@ const ProductCreateService = async (req, ProductModel) => {
             brandID,
         } = req.body;
 
-
-        if (
-            title === undefined || title === null ||
-            des === undefined || des === null ||
-            price === undefined || price === null ||
-            status === undefined || status === null ||
-            image === undefined || image === null ||
-            stock === undefined || stock === null ||
-            remarks === undefined || remarks === null ||
-            categoryID === undefined || categoryID === null ||
-            brandID === undefined || brandID === null
-        ) {
-            return { status: "failed", data: "All required fields must be provided" };
-        }
-
-        // If discount is true, discountPrice should exist
-        if (discount && (discountPrice === undefined || discountPrice === null)) {
-            return { status: "failed", data: "Discount price required when discount is true" };
-        }
 
         // Generate slug from title
         const slug = slugify(title, { lower: true, strict: true });
@@ -121,10 +121,7 @@ const ProductUpdateService = async (req, ProductModel) => {
         const { id } = req.params;
         const updateData = req.body;
 
-        if (updateData.discount && (updateData.discountPrice === undefined || updateData.discountPrice === null)) {
-            return { status: "failed", data: "Discount price required when discount is true" };
-        }
-
+        // Directly update the product; validation has already been done in middleware
         const product = await ProductModel.findByIdAndUpdate(id, updateData, { new: true });
 
         if (!product) {
@@ -136,6 +133,7 @@ const ProductUpdateService = async (req, ProductModel) => {
         return { status: "failed", data: error.toString() };
     }
 };
+
 
 const BrandListService=async (req, brandModel)=>{
     try {

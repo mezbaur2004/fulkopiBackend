@@ -21,6 +21,10 @@ const CategoryListService=async (req,categoryModel)=>{
 
 const ProductListService=async (req,productModel)=>{
     try {
+        let page = Number(req.query.page) || 1;
+        let limit = Number(req.query.limit) || 10;
+        let skip=(page-1)*limit;
+        const total = await productModel.countDocuments({ status: true });
         let data=await productModel.aggregate([
             {$match:{status:true}},
             {
@@ -56,9 +60,18 @@ const ProductListService=async (req,productModel)=>{
                     brand: { brandName: 1, brandImg: 1 },
                     category: { categoryName: 1, categoryImg: 1 }
                 }
-            }
+
+            },
+            { $skip: skip },
+            { $limit: limit },
             ])
-        return {status:"success",data:data};
+        return {status:"success",data:data,
+                pagination: {
+                    total,
+                    page,
+                    limit,
+                    totalPages: Math.ceil(total / limit),
+                    }};
     }catch (error) {
         return {status:"failed", data:error.toString()};
     }
@@ -66,6 +79,10 @@ const ProductListService=async (req,productModel)=>{
 
 const ListByBrandService=async (req,productModel)=>{
     try{
+        let page = Number(req.query.page) || 1;
+        let limit = Number(req.query.limit) || 10;
+        let skip=(page-1)*limit;
+        const total = await productModel.countDocuments({ status: true, brandID: req.params.brandID });
         let brandID=new mongoose.Types.ObjectId(req.params.brandID)
         let MatchStage={$match:{brandID:brandID, status:true}}
         let JoinWithBrandStage={$lookup:{from: 'brands',localField: 'brandID',foreignField: '_id', as:"brand"}}
@@ -76,9 +93,16 @@ const ListByBrandService=async (req,productModel)=>{
         let CategoryStatusCheck={$match:{"category.status":true}}
         let ProjectionStage={$project:{categoryID: 0,brandID:0, 'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
-            MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage,BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck,ProjectionStage
+            MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage,BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck,ProjectionStage,{$skip:skip},{$limit:limit }
         ])
-        return {status:"success",data:data};
+        return {status:"success",data:data,
+            pagination:{
+                total,
+                    page,
+                    limit,
+                    totalPages: Math.ceil(total / limit),
+            }
+        };
     }catch (error) {
         return {status:"failed", data:error.toString()};
     }
@@ -86,6 +110,10 @@ const ListByBrandService=async (req,productModel)=>{
 
 const ListByCategoryService=async (req,productModel)=>{
     try{
+        let page = Number(req.query.page) || 1;
+        let limit = Number(req.query.limit) || 10;
+        let skip=(page-1)*limit;
+        const total = await productModel.countDocuments({ status: true, categoryID: req.params.categoryID });
         let categoryID=new mongoose.Types.ObjectId(req.params.categoryID)
         let MatchStage={$match:{categoryID:categoryID, status:true}}
         let JoinWithBrandStage={$lookup:{from: 'brands',localField: 'brandID',foreignField: '_id', as:"brand"}}
@@ -96,9 +124,15 @@ const ListByCategoryService=async (req,productModel)=>{
         let CategoryStatusCheck={$match:{"category.status":true}}
         let ProjectionStage={$project:{categoryID: 0,brandID:0, 'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
-            MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage, BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck,ProjectionStage
+            MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage, BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck,ProjectionStage,{$skip:skip},{$limit:limit }
         ])
-        return {status:"success",data:data};
+        return {status:"success",data:data,
+            pagination:{
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
+            }};
     }catch (error) {
         return {status:"failed", data:error.toString()};
     }
@@ -106,8 +140,12 @@ const ListByCategoryService=async (req,productModel)=>{
 
 const ListByKeywordService=async (req,productModel)=>{
     try {
+        let page = Number(req.query.page) || 1;
+        let limit = Number(req.query.limit) || 10;
+        let skip=(page-1)*limit;
         let SearchRegex={"$regex":req.params.keyword,"$options":"i"};
         let SearchParams=[{title:SearchRegex},{des:SearchRegex}];
+        const total = await productModel.countDocuments({ status: true, $or: SearchParams});
         let MatchStage={$match:{status:true, $or:SearchParams}};
         let JoinWithBrandStage={$lookup:{from: 'brands',localField: 'brandID',foreignField: '_id', as:"brand"}}
         let JoinWithCategoryStage={$lookup:{from:'categories',localField: 'categoryID',foreignField: '_id', as:"category"}}
@@ -117,9 +155,16 @@ const ListByKeywordService=async (req,productModel)=>{
         let CategoryStatusCheck={$match:{"category.status":true}}
         let ProjectionStage={$project:{categoryID: 0,brandID:0, 'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
-            MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage,BrandStatusCheck,UnwindCategoryStage,CategoryStatusCheck,ProjectionStage
+            MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage,BrandStatusCheck,UnwindCategoryStage,CategoryStatusCheck,ProjectionStage,{$skip:skip},{$limit:limit }
         ])
-        return {status:"success",data:data};
+        return {status:"success",data:data,
+            pagination:{
+                total,
+                page,
+                limit,
+                totalPages: Math.ceil(total / limit),
+            }
+        };
 
     }catch (error) {
         return {status:"failed", data:error.toString()};
@@ -128,7 +173,11 @@ const ListByKeywordService=async (req,productModel)=>{
 
 const ListByRemarkService=async (req,productModel)=>{
     try{
+        let page = Number(req.query.page) || 1;
+        let limit = Number(req.query.limit) || 10;
+        let skip=(page-1)*limit;
         let remarks=req.params.remarks;
+        const total = await productModel.countDocuments({ status: true, remarks:remarks});
         let MatchStage={$match:{remarks:remarks, status:true}};
         let JoinWithBrandStage={$lookup:{from:'brands', localField:'brandID',foreignField: '_id', as:"brand"}}
         let JoinWithCategoryStage={$lookup:{from:'categories',localField: 'categoryID',foreignField: '_id', as:"category"}}
@@ -138,9 +187,15 @@ const ListByRemarkService=async (req,productModel)=>{
         let CategoryStatusCheck={$match:{"category.status":true}}
         let ProjectionStage={$project:{brandID:0,categoryID:0,'brand._id':0,'category._id':0}}
         let data= await productModel.aggregate([
-            MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage, BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck,ProjectionStage
+            MatchStage,JoinWithBrandStage,JoinWithCategoryStage,UnwindBrandStage, BrandStatusCheck,UnwindCategoryStage, CategoryStatusCheck,ProjectionStage,{$skip:skip},{$limit:limit }
         ])
-        return {status:"success",data:data};
+        return {status:"success",data:data,
+        pagination:{
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),}
+        };
     }catch (error) {
         return {status:"failed", data:error.toString()};
     }

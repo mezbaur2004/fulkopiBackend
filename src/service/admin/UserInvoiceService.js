@@ -1,11 +1,25 @@
 const mongoose = require("mongoose");
 
-const UserListService = async (UserModel) => {
+const UserListService = async (req,UserModel) => {
     try {
-        const users = await UserModel.find({}, "-password") // don’t send passwords
-            .sort({ createdAt: -1 }); // newest first
-
-        return { status: "success", data: users };
+        let limit=Number(req.query.limit) ||10;
+        let page=Number(req.query.page) ||1;
+        let skip=(page-1)*limit;
+        let total=await UserModel.countDocuments();
+        const users = await UserModel.aggregate([
+            { $project: { password: 0 } },     // exclude password
+            { $sort: { createdAt: -1 } },      // newest first
+            { $skip: skip },                    // skip for pagination
+            { $limit: limit }                   // limit for pagination
+        ]);
+        return { status: "success", data: users,
+        pagination:{
+            total,
+            page,
+            limit,
+            totalPages: Math.ceil(total/limit),
+        }
+        };
     } catch (error) {
         return { status: "failed", data: error.toString() };
     }
@@ -22,8 +36,13 @@ const OneUserInvoiceService = async (req, InvoiceModel) => {
     }
 }
 
-const UserInvoiceListService = async (InvoiceModel) => {
+const UserInvoiceListService = async (req,InvoiceModel) => {
     try {
+        let limit=Number(req.query.limit) ||10;
+        let page=Number(req.query.page) ||1;
+        let skip=(page-1)*limit;
+        let total=await InvoiceModel.countDocuments();
+
         let data = await InvoiceModel.aggregate([
             {
                 $lookup: {
@@ -51,10 +70,18 @@ const UserInvoiceListService = async (InvoiceModel) => {
                     "user.role": 1
                 }
             },
-            { $sort: { createdAt: -1 } } // newest first
+            { $sort: { createdAt: -1 } }, // newest first
+            {$skip: skip},
+            { $limit: limit }
         ]);
 
-        return { status: "success", data };
+        return { status: "success", data,
+        pagination:{
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total/limit)}
+        };
     } catch (error) {
         return { status: "failed", data: error.toString() };
     }

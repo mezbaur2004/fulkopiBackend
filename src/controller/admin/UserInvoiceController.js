@@ -4,7 +4,7 @@ const invoiceModel=require('../../model/invoiceModel');
 const invoiceProductModel  =  require('../../model/invoiceProductModel');
 
 exports.userList=async (req,res)=>{
-    let result= await UserListService(userModel);
+    let result= await UserListService(req,userModel);
     return res.status(200).send(result);
 }
 
@@ -14,7 +14,7 @@ exports.oneUserInvoiceList=async (req,res)=>{
 }
 
 exports.userInvoiceList=async (req,res)=>{
-    let result= await UserInvoiceListService(invoiceModel);
+    let result= await UserInvoiceListService(req,invoiceModel);
     return res.status(200).send(result);
 }
 
