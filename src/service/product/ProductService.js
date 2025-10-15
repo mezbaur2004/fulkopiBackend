@@ -22,7 +22,7 @@ const CategoryListService=async (req,categoryModel)=>{
 const ProductListService=async (req,productModel)=>{
     try {
         let page = Number(req.query.page) || 1;
-        let limit = Number(req.query.limit) || 10;
+        let limit = Number(req.query.limit) || 8;
         let skip=(page-1)*limit;
         const total = await productModel.countDocuments({ status: true });
         let data=await productModel.aggregate([
@@ -80,7 +80,7 @@ const ProductListService=async (req,productModel)=>{
 const ListByBrandService=async (req,productModel)=>{
     try{
         let page = Number(req.query.page) || 1;
-        let limit = Number(req.query.limit) || 10;
+        let limit = Number(req.query.limit) || 8;
         let skip=(page-1)*limit;
         const total = await productModel.countDocuments({ status: true, brandID: req.params.brandID });
         let brandID=new mongoose.Types.ObjectId(req.params.brandID)
@@ -111,7 +111,7 @@ const ListByBrandService=async (req,productModel)=>{
 const ListByCategoryService=async (req,productModel)=>{
     try{
         let page = Number(req.query.page) || 1;
-        let limit = Number(req.query.limit) || 10;
+        let limit = Number(req.query.limit) || 8;
         let skip=(page-1)*limit;
         const total = await productModel.countDocuments({ status: true, categoryID: req.params.categoryID });
         let categoryID=new mongoose.Types.ObjectId(req.params.categoryID)
@@ -141,7 +141,7 @@ const ListByCategoryService=async (req,productModel)=>{
 const ListByKeywordService=async (req,productModel)=>{
     try {
         let page = Number(req.query.page) || 1;
-        let limit = Number(req.query.limit) || 10;
+        let limit = Number(req.query.limit) || 8;
         let skip=(page-1)*limit;
         let SearchRegex={"$regex":req.params.keyword,"$options":"i"};
         let SearchParams=[{title:SearchRegex},{des:SearchRegex}];
@@ -174,7 +174,7 @@ const ListByKeywordService=async (req,productModel)=>{
 const ListByRemarkService=async (req,productModel)=>{
     try{
         let page = Number(req.query.page) || 1;
-        let limit = Number(req.query.limit) || 10;
+        let limit = Number(req.query.limit) || 8;
         let skip=(page-1)*limit;
         let remarks=req.params.remarks;
         const total = await productModel.countDocuments({ status: true, remarks:remarks});
