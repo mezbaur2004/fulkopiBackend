@@ -29,7 +29,7 @@ app.use(hpp());
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-const limiter= rateLimit({windowMs:60*1000,max:100})
+const limiter= rateLimit({windowMs:60*1000,max:300})
 app.use(limiter);
 
 //body parser implement
@@ -38,7 +38,7 @@ app.use(limiter);
 
 let URL=process.env.URL;
 let option={user:'',pass:"",autoIndex:true};
-mongoose.connect(URL,option).then((res)=>{
+mongoose.connect(URL,option).then(()=>{
     console.log("Database Connected")
 }).catch((err)=>{
     console.log(err)

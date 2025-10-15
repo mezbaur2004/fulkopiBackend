@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema(
         // Meta
         provider: { type: String, enum: ["local", "google"], required: true },
         // 🔑 Role (new)
-        role: { type: String, enum: ["user", "admin"], default: "user",},
+        role: { type: String, enum: ["user", "admin"], default: "user",required: true },
     },
     { timestamps: true, versionKey: false }
 );

@@ -11,15 +11,15 @@ const {AuthMiddleware, AdminMiddleware, ValidationMiddleware} = require("../midd
 const {ProductValidator} = require("../validators/ProductValidator");
 const {BrandValidator} = require("../validators/BrandValidator");
 const {CategoryValidator} = require("../validators/CategoryValidator");
+const {RegistrationValidator} = require("../validators/RegistrationValidator");
 
 
 const router=express.Router();
 
 //User
-router.post("/registration",userController.Registration);
+router.post("/registration",RegistrationValidator,ValidationMiddleware,userController.Registration);
 router.post("/login",userController.Login);
 router.get("/profileDetails",AuthMiddleware,userController.profileDetails);
-router.put("/profileUpdate",AuthMiddleware,userController.updateProfile);
 router.post("/google",userController.googleUser);
 
 //Product
@@ -73,6 +73,7 @@ router.post('/CategoryCreate',AuthMiddleware,AdminMiddleware,CategoryValidator,V
 router.put('/CategoryUpdate/:id',AuthMiddleware,AdminMiddleware,CategoryValidator,ValidationMiddleware,productUpdateUpdateController.categoryUpdate);
 
 router.get('/userList',AuthMiddleware,AdminMiddleware,userInvoiceController.userList);
+router.put("/profileUpdate/:id",RegistrationValidator,ValidationMiddleware,AuthMiddleware,AdminMiddleware,userController.updateProfile);
 router.get('/oneUserInvoiceList/:id',AuthMiddleware,AdminMiddleware,userInvoiceController.oneUserInvoiceList);
 
 router.get('/userInvoiceList',AuthMiddleware,AdminMiddleware,userInvoiceController.userInvoiceList);
