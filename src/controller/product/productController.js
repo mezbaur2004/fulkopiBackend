@@ -20,12 +20,12 @@ exports.productList=async (req,res)=>{
 }
 
 exports.listByBrand=async (req,res)=>{
-    let result=await ListByBrandService(req,productModel);
+    let result=await ListByBrandService(req,brandModel,productModel);
     return res.status(200).send(result);
 }
 
 exports.listByCategory=async (req,res)=>{
-    let result= await ListByCategoryService(req,productModel);
+    let result= await ListByCategoryService(req,categoryModel,productModel);
     return res.status(200).send(result);
 }
 

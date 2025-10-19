@@ -26,8 +26,8 @@ router.post("/google",userController.googleUser);
 router.get("/brandList",productController.brandList);
 router.get("/categoryList",productController.categoryList);
 router.get("/productList",productController.productList);
-router.get('/listByBrand/:brandID',productController.listByBrand);
-router.get('/listByCategory/:categoryID',productController.listByCategory);
+router.get('/listByBrand/:slug',productController.listByBrand);
+router.get('/listByCategory/:slug',productController.listByCategory);
 router.get('/listByKeyword/:keyword',productController.listByKeyword);
 router.get('/listByRemark/:remarks',productController.listByRemark);
 router.get('/productDetails/:slug',productController.productDetails);
@@ -55,7 +55,9 @@ router.get('/InvoiceList',AuthMiddleware,invoiceController.invoiceList);
 router.get('/InvoiceProductList/:invoice_id',AuthMiddleware,invoiceController.invoiceProductList);
 
 
-//Admin Dashboard
+//Admin Dashboard---------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 router.get('/adminProductList',AuthMiddleware,AdminMiddleware,productCreateUpdateController.productList);
 router.get('/adminProductDetails/:id',AuthMiddleware,AdminMiddleware,productUpdateUpdateController.singleProduct);

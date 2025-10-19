@@ -77,13 +77,18 @@ const ProductListService=async (req,productModel)=>{
     }
 }
 
-const ListByBrandService=async (req,productModel)=>{
+const ListByBrandService=async (req,BrandModel,productModel)=>{
     try{
+        let slug=req.params.slug
+        const brand = await BrandModel.findOne({ slug, status: true }).select("_id");
+        if (!brand) {
+            return { status: "fail", data: "Brand not found or inactive" };
+        }
+        const brandID = new mongoose.Types.ObjectId(brand._id);
         let page = Number(req.query.page) || 1;
         let limit = Number(req.query.limit) || 8;
         let skip=(page-1)*limit;
-        const total = await productModel.countDocuments({ status: true, brandID: req.params.brandID });
-        let brandID=new mongoose.Types.ObjectId(req.params.brandID)
+        const total = await productModel.countDocuments({ status: true, brandID: brandID });
         let MatchStage={$match:{brandID:brandID, status:true}}
         let JoinWithBrandStage={$lookup:{from: 'brands',localField: 'brandID',foreignField: '_id', as:"brand"}}
         let JoinWithCategoryStage={$lookup:{from:'categories',localField: 'categoryID',foreignField: '_id', as:"category"}}
@@ -108,13 +113,18 @@ const ListByBrandService=async (req,productModel)=>{
     }
 }
 
-const ListByCategoryService=async (req,productModel)=>{
+const ListByCategoryService=async (req,CategoryModel,productModel)=>{
     try{
+        let slug=req.params.slug
+        const category = await CategoryModel.findOne({slug,status:true}).select("_id");
+        if (!category) {
+            return { status: "fail", data: "Category not found or inactive" };
+        }
+        const categoryID=new mongoose.Types.ObjectId(category._id);
         let page = Number(req.query.page) || 1;
         let limit = Number(req.query.limit) || 8;
         let skip=(page-1)*limit;
-        const total = await productModel.countDocuments({ status: true, categoryID: req.params.categoryID });
-        let categoryID=new mongoose.Types.ObjectId(req.params.categoryID)
+        const total = await productModel.countDocuments({ status: true, categoryID:categoryID});
         let MatchStage={$match:{categoryID:categoryID, status:true}}
         let JoinWithBrandStage={$lookup:{from: 'brands',localField: 'brandID',foreignField: '_id', as:"brand"}}
         let JoinWithCategoryStage={$lookup:{from:'categories',localField: 'categoryID',foreignField: '_id', as:"category"}}

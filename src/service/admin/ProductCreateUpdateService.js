@@ -91,7 +91,7 @@ const ProductCreateService = async (req, ProductModel) => {
         // Check for duplicate slug (optional)
         const exists = await ProductModel.findOne({ slug });
         if (exists) {
-            return { status: "failed", data: "Product with this title already exists" };
+            return { status: "fail", data: "Product with this title already exists" };
         }
 
         const product = await ProductModel.create({
@@ -119,15 +119,17 @@ const ProductCreateService = async (req, ProductModel) => {
 const ProductUpdateService = async (req, ProductModel) => {
     try {
         const { id } = req.params;
-        const updateData = req.body;
-
-        // Directly update the product; validation has already been done in middleware
+        let updateData = req.body;
+        const slug = slugify(updateData.title, { lower: true, strict: true });
+        updateData.slug = slug;
+        const existing = await ProductModel.findOne({ slug, _id: { $ne: id } });
+        if (existing) {
+            return { status: "fail", data: "Slug already exists for another product" };
+        }
         const product = await ProductModel.findByIdAndUpdate(id, updateData, { new: true });
-
         if (!product) {
             return { status: "failed", data: "Product not found" };
         }
-
         return { status: "success", data: product };
     } catch (error) {
         return { status: "failed", data: error.toString() };
@@ -158,10 +160,6 @@ const BrandCreateService = async (req, BrandModel) => {
     try {
         const { brandName, status, brandImg } = req.body;
 
-        if (!brandName || !brandImg || status === undefined) {
-            return { status: "fail", data: "All fields are required" };
-        }
-
         const slug = slugify(brandName, { lower: true, strict: true });
 
         // Check if brand already exists
@@ -184,17 +182,24 @@ const BrandUpdateService = async (req, BrandModel) => {
         const { id } = req.params;
         const { brandName, status, brandImg } = req.body;
 
-        if (!brandName && status === undefined && !brandImg) {
-            return { status: "fail", data: "At least one field required to update" };
+        const updateData = {};
+
+        if (brandName) {
+            const slug = slugify(brandName, { lower: true, strict: true });
+            const existing = await BrandModel.findOne({ slug, _id: { $ne: id } });
+            if (existing) {
+                return { status: "fail", data: "Slug already exists for another brand" };
+            }
+            updateData.brandName = brandName;
+            updateData.slug = slug;
         }
 
-        const updateData = {};
-        if (brandName) {
-            updateData.brandName = brandName;
-            updateData.slug = slugify(brandName, { lower: true, strict: true });
-        }
         if (status !== undefined) updateData.status = status;
         if (brandImg) updateData.brandImg = brandImg;
+
+        if (Object.keys(updateData).length === 0) {
+            return { status: "fail", data: "No valid fields provided to update" };
+        }
 
         const updatedBrand = await BrandModel.findByIdAndUpdate(id, updateData, { new: true });
         if (!updatedBrand) return { status: "fail", data: "Brand not found" };
@@ -205,6 +210,7 @@ const BrandUpdateService = async (req, BrandModel) => {
         return { status: "failed", data: error.toString() };
     }
 };
+
 
 const CategoryListService=async (req,categoryModel)=>{
     try {
@@ -230,10 +236,6 @@ const CategoryCreateService = async (req, CategoryModel) => {
     try {
         const { categoryName, status, categoryImg } = req.body;
 
-        if (!categoryName || !categoryImg || status === undefined) {
-            return { status: "fail", data: "All fields are required" };
-        }
-
         const slug = slugify(categoryName, { lower: true, strict: true });
 
         // Check if cat already exists
@@ -256,17 +258,24 @@ const CategoryUpdateService = async (req, CategoryModel) => {
         const { id } = req.params;
         const { categoryName, status, categoryImg } = req.body;
 
-        if (!categoryName && status === undefined && !categoryImg) {
-            return { status: "fail", data: "At least one field required to update" };
+        const updateData = {};
+
+        if (categoryName) {
+            const slug = slugify(categoryName, { lower: true, strict: true });
+            const existing = await CategoryModel.findOne({ slug, _id: { $ne: id } });
+            if (existing) {
+                return { status: "fail", data: "Slug already exists for another category" };
+            }
+            updateData.categoryName = categoryName;
+            updateData.slug = slug;
         }
 
-        const updateData = {};
-        if (categoryName) {
-            updateData.categoryName = categoryName;
-            updateData.slug = slugify(categoryName, { lower: true, strict: true });
-        }
         if (status !== undefined) updateData.status = status;
         if (categoryImg) updateData.categoryImg = categoryImg;
+
+        if (Object.keys(updateData).length === 0) {
+            return { status: "fail", data: "No valid fields provided to update" };
+        }
 
         const updatedCategory = await CategoryModel.findByIdAndUpdate(id, updateData, { new: true });
         if (!updatedCategory) return { status: "fail", data: "Category not found" };
@@ -277,8 +286,6 @@ const CategoryUpdateService = async (req, CategoryModel) => {
         return { status: "failed", data: error.toString() };
     }
 };
-
-
 
 
 module.exports = {
