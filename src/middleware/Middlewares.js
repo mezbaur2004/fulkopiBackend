@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const {validationResult}=require('express-validator');
+const rateLimit = require("express-rate-limit");
 const jwtKey = process.env.JWT_KEY;
 
 // User authentication middleware
@@ -43,4 +44,10 @@ const ValidationMiddleware=(req, res, next)=> {
     next();
 }
 
-module.exports = {AuthMiddleware: Middlewares,AdminMiddleware,ValidationMiddleware};
+const rateLimitMiddleware=rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 3,
+    message: "Too many login attempts. Try again later."
+})
+
+module.exports = {AuthMiddleware: Middlewares,AdminMiddleware,ValidationMiddleware,rateLimitMiddleware};
