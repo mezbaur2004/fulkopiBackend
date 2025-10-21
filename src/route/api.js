@@ -7,7 +7,7 @@ const invoiceController=require('../controller/invoice/invoiceController');
 const productCreateUpdateController=require('../controller/admin/ProductCreateUpdateController')
 const productUpdateUpdateController = require("../controller/admin/ProductCreateUpdateController");
 const userInvoiceController=require('../controller/admin/UserInvoiceController');
-const {AuthMiddleware, AdminMiddleware, ValidationMiddleware} = require("../middleware/Middlewares");
+const {AuthMiddleware, AdminMiddleware, ValidationMiddleware, rateLimitMiddleware} = require("../middleware/Middlewares");
 const {ProductValidator} = require("../validators/ProductValidator");
 const {BrandValidator} = require("../validators/BrandValidator");
 const {CategoryValidator} = require("../validators/CategoryValidator");
@@ -17,8 +17,8 @@ const {RegistrationValidator} = require("../validators/RegistrationValidator");
 const router=express.Router();
 
 //User
-router.post("/registration",RegistrationValidator,ValidationMiddleware,userController.Registration);
-router.post("/login",userController.Login);
+router.post("/registration",rateLimitMiddleware,RegistrationValidator,ValidationMiddleware,userController.Registration);
+router.post("/login",rateLimitMiddleware,userController.Login);
 router.get("/profileDetails",AuthMiddleware,userController.profileDetails);
 router.post("/google",userController.googleUser);
 
@@ -75,7 +75,7 @@ router.post('/CategoryCreate',AuthMiddleware,AdminMiddleware,CategoryValidator,V
 router.put('/CategoryUpdate/:id',AuthMiddleware,AdminMiddleware,CategoryValidator,ValidationMiddleware,productUpdateUpdateController.categoryUpdate);
 
 router.get('/userList',AuthMiddleware,AdminMiddleware,userInvoiceController.userList);
-router.put("/profileUpdate/:id",RegistrationValidator,ValidationMiddleware,AuthMiddleware,AdminMiddleware,userController.updateProfile);
+//router.put("/profileUpdate/:id",RegistrationValidator,ValidationMiddleware,AuthMiddleware,AdminMiddleware,userController.updateProfile);
 router.get('/oneUserInvoiceList/:id',AuthMiddleware,AdminMiddleware,userInvoiceController.oneUserInvoiceList);
 
 router.get('/userInvoiceList',AuthMiddleware,AdminMiddleware,userInvoiceController.userInvoiceList);
