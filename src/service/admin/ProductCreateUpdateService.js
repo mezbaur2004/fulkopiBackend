@@ -28,15 +28,11 @@ const ProductListService = async (req, productModel) => {
             },
             { $unwind: '$category' },
             { $sort: { createdAt: -1 }
-            }, // newest first
+            },
             {$skip:skip},
             {$limit:limit},
 
         ]);
-        // let loop=[] //performance test-1
-        // for (let i = 0; i < 10000; i++) {
-        //     loop[i]=data;
-        // }
 
         return { status: "success", data: data,
             pagination: {
@@ -88,7 +84,7 @@ const ProductCreateService = async (req, ProductModel) => {
         // Generate slug from title
         const slug = slugify(title, { lower: true, strict: true });
 
-        // Check for duplicate slug (optional)
+        // Check for duplicate slug
         const exists = await ProductModel.findOne({ slug });
         if (exists) {
             return { status: "fail", data: "Product with this title already exists" };
@@ -139,8 +135,18 @@ const ProductUpdateService = async (req, ProductModel) => {
 
 const BrandListService=async (req, brandModel)=>{
     try {
-        let data=await brandModel.find().sort({ createdAt: -1 });
-        return {status:"success",data:data};
+        let page= Number(req.query.page) || 1;
+        let limit=Number(req.query.limit) || 6;
+        let skip=(page-1)*limit;
+        const total=await brandModel.countDocuments();
+        let data=await brandModel.aggregate([{$skip:skip},{$limit:limit}]).sort({ createdAt: -1 });
+        return {status:"success",data:data,
+            pagination:{
+                total,
+                page,
+                limit,
+                totalPages:Math.ceil(total/limit)
+            }};
     }catch (error) {
         return {status:"failed", data:error.toString()};
     }
@@ -214,8 +220,19 @@ const BrandUpdateService = async (req, BrandModel) => {
 
 const CategoryListService=async (req,categoryModel)=>{
     try {
-        let data=await categoryModel.find().sort({ createdAt: -1 });
-        return {status:"success",data:data};
+        let page= Number(req.query.page) || 1;
+        let limit=Number(req.query.limit) || 6;
+        let skip=(page-1)*limit;
+        const total=await categoryModel.countDocuments();
+        let data=await categoryModel.aggregate([{$skip:skip},{$limit:limit}]).sort({ createdAt: -1 });
+        return {status:"success",data:data,
+            pagination:{
+                total,
+                page,
+                limit,
+                totalPages:Math.ceil(total/limit)
+            }
+        };
     }catch (error) {
         return {status:"failed", data:error.toString()};
     }
