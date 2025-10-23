@@ -1,0 +1,713 @@
+[{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000118"
+  },
+  "title": "Sugar (1kg)",
+  "slug": "sugar-1kg",
+  "des": "Refined white sugar",
+  "price": 85,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281004/Screenshot_2025-08-27_134130_rhuczp.png",
+  "stock": true,
+  "remarks": "Pantry",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000015"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000002"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T11:50:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000105"
+  },
+  "title": "Banana",
+  "slug": "banana",
+  "des": "Sweet ripe bananas",
+  "price": 100,
+  "discount": false,
+  "discountPrice": null,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280981/1-dozen-packaging-size-yellow-pure-natural-banana-362_cgsyls.jpg",
+  "stock": true,
+  "remarks": "New Arrival",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000012"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000002"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T08:40:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-07T10:31:25.565Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000111"
+  },
+  "title": "Atta (5kg)",
+  "slug": "atta-5kg",
+  "des": "Whole wheat flour",
+  "price": 420,
+  "discount": true,
+  "discountPrice": 400,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280996/pusti-atta-1kg-600x600_acban4.jpg",
+  "stock": true,
+  "remarks": "Family Pack",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000015"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000001"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T10:40:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c0000000011b"
+  },
+  "title": "Pumpkin",
+  "slug": "pumpkin",
+  "des": "Fresh pumpkin (per piece)",
+  "price": 150,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281014/Screenshot_2025-08-27_134253_l3wkbo.png",
+  "stock": true,
+  "remarks": "Big & Fresh",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000005"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T12:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000104"
+  },
+  "title": "Cauliflower (Fulkopi)",
+  "slug": "cauliflower-fulkopi",
+  "des": "Fresh white fulkopi",
+  "price": 80,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280988/Fulkopi-Cauliflower_xztel1.jpg",
+  "stock": true,
+  "remarks": "Seasonal",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000001"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T08:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-07T10:31:09.630Z"
+  },
+  "discountPrice": null
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000115"
+  },
+  "title": "Beef Mince (500g)",
+  "slug": "beef-mince-500g",
+  "des": "Lean beef mince pack",
+  "price": 380,
+  "discount": true,
+  "discountPrice": 360,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281005/Screenshot_2025-08-27_134152_hmm5sp.png",
+  "stock": true,
+  "remarks": "Sale",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000013"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000005"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T11:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000106"
+  },
+  "title": "Eggs (12 pcs)",
+  "slug": "eggs-12-pcs",
+  "des": "Farm fresh eggs - dozen",
+  "price": 150,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280996/Science-update-Eggs-and-health-500x332_nphlbq.jpg",
+  "stock": false,
+  "remarks": "High Demand",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000013"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000003"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T08:50:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000119"
+  },
+  "title": "Moong Dal (500g)",
+  "slug": "moong-dal-500g",
+  "des": "Split green gram",
+  "price": 120,
+  "discount": true,
+  "discountPrice": 110,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280995/mug-dal-500-gm_zxdoxu.jpg",
+  "stock": true,
+  "remarks": "Protein Rich",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000015"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000003"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T12:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000101"
+  },
+  "title": "Potato",
+  "slug": "potato",
+  "des": "Fresh organic potatoes",
+  "price": 40,
+  "discount": true,
+  "discountPrice": 35,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281004/png-clipart-yukon-gold-potato-french-fries-potato-varieties-potato-bread-fries-miscellaneous-food-thumbnail_hshxkn.png",
+  "stock": true,
+  "remarks": "Best Seller",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000001"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T08:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c0000000010d"
+  },
+  "title": "Mango (Local)",
+  "slug": "mango-local",
+  "des": "Seasonal sweet mangoes",
+  "price": 350,
+  "discount": true,
+  "discountPrice": 320,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280995/mango_mqoate.jpg",
+  "stock": true,
+  "remarks": "Seasonal",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000012"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000005"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T10:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000116"
+  },
+  "title": "Chicken Breast (500g)",
+  "slug": "chicken-breast-500g",
+  "des": "Boneless chicken breast",
+  "price": 260,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281802/594e4559-f6b7-417d-9aac-d0643b5711d3_mz0rg1.webp",
+  "stock": true,
+  "remarks": "Healthy Choice",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000013"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000001"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T11:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000103"
+  },
+  "title": "Onion",
+  "slug": "onion",
+  "des": "Golden onions full of flavor",
+  "price": 55,
+  "discount": true,
+  "discountPrice": 45,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280982/0481686_onion-local-1kg_hyboz0.jpg",
+  "stock": true,
+  "remarks": "Popular",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000003"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T08:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c0000000010a"
+  },
+  "title": "Red Chili",
+  "slug": "red-chili",
+  "des": "Hot dried red chili (250g)",
+  "price": 90,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280988/chil_vslqfb.jpg",
+  "stock": true,
+  "remarks": "Spicy",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000005"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T09:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000117"
+  },
+  "title": "Cheese Slice (200g)",
+  "slug": "cheese-slice-200g",
+  "des": "Processed cheese slices",
+  "price": 130,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281010/Screenshot_2025-08-27_134227_gfshqu.png",
+  "stock": true,
+  "remarks": "Kids Favorite",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000014"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000004"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T11:40:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000102"
+  },
+  "title": "Tomato",
+  "slug": "tomato",
+  "des": "Juicy ripe tomatoes",
+  "price": 60,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280995/product_1584862707_quua9p.jpg",
+  "stock": true,
+  "remarks": "Hot Item",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000002"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T08:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000109"
+  },
+  "title": "Garlic",
+  "slug": "garlic",
+  "des": "Fresh garlic bulbs",
+  "price": 120,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280981/0064490_garlic-china-pack-1-kg_400_geic9s.jpg",
+  "stock": true,
+  "remarks": "Flavorful",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000004"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T09:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000112"
+  },
+  "title": "Potato (Premium)",
+  "slug": "potato-premium",
+  "des": "Premium grade potatoes",
+  "price": 60,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281009/Screenshot_2025-08-27_134206_auumh1.png",
+  "stock": true,
+  "remarks": "Choice",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000004"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T10:50:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c0000000011a"
+  },
+  "title": "Spinach",
+  "slug": "spinach",
+  "des": "Bunch of fresh spinach",
+  "price": 35,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281003/spin_l71sbp.jpg",
+  "stock": true,
+  "remarks": "Leafy Green",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000001"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T12:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c0000000010f"
+  },
+  "title": "Paneer (200g)",
+  "slug": "paneer-200g",
+  "des": "Homemade paneer block",
+  "price": 160,
+  "discount": true,
+  "discountPrice": 145,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281587/Paneer-cubes-on-cutting-board-edited-19-of-1-1_xhbv1b.jpg",
+  "stock": true,
+  "remarks": "Fresh",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000014"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000003"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T10:20:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000114"
+  },
+  "title": "Papaya",
+  "slug": "papaya",
+  "des": "Fresh papaya per piece",
+  "price": 140,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280981/4IkudTMyEo0RLNjG2PrZZBGsJXQtRRRv4L0XTw9E_ncfluw.jpg",
+  "stock": true,
+  "remarks": "Soft & Sweet",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000012"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000003"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T11:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000108"
+  },
+  "title": "Beef (Per kg)",
+  "slug": "beef-per-kg",
+  "des": "Premium beef cuts",
+  "price": 700,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280982/0214671_beef-premium-1kg_ujvb8e.jpg",
+  "stock": true,
+  "remarks": "Premium",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000013"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000002"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T09:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000110"
+  },
+  "title": "Rice (Basmati 1kg)",
+  "slug": "rice-basmati-1kg",
+  "des": "Premium basmati rice",
+  "price": 320,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281005/Screenshot_2025-08-27_134142_smj9ki.png",
+  "stock": true,
+  "remarks": "Staple",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000015"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000005"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T10:30:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000107"
+  },
+  "title": "Chicken (Whole)",
+  "slug": "chicken-whole",
+  "des": "Fresh whole chicken",
+  "price": 320,
+  "discount": true,
+  "discountPrice": 300,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1758014773/Screenshot_2025-09-16_152346_xjmytk.png",
+  "stock": true,
+  "remarks": "Hot Item",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000013"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000001"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T09:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c0000000010e"
+  },
+  "title": "Milk (1L)",
+  "slug": "milk-1l",
+  "des": "Fresh whole milk",
+  "price": 110,
+  "discount": false,
+  "status": false,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280981/0071389_pran-mk-uht-milk-1-ltr_mi5sqj.jpg",
+  "stock": true,
+  "remarks": "Basic",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000014"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000004"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T10:10:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c00000000113"
+  },
+  "title": "Green Beans",
+  "slug": "green-beans",
+  "des": "Fresh green beans (250g)",
+  "price": 90,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281010/Screenshot_2025-08-27_134216_srcu9l.png",
+  "stock": true,
+  "remarks": "Seasonal",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000002"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T11:00:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c0000000010b"
+  },
+  "title": "Apple",
+  "slug": "apple",
+  "des": "Fresh red apples (1kg)",
+  "price": 220,
+  "discount": true,
+  "discountPrice": 200,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756281016/Screenshot_2025-08-27_134300_wrp1rn.png",
+  "stock": true,
+  "remarks": "Popular",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000012"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000002"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T09:40:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a3d5c3f0c0000000010c"
+  },
+  "title": "Orange",
+  "slug": "orange",
+  "des": "Juicy oranges (1kg)",
+  "price": 180,
+  "discount": false,
+  "status": true,
+  "image": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280988/f85348e36d3fd2c274e4a3099a9009b5_g4xw1t.jpg",
+  "stock": true,
+  "remarks": "Citrus",
+  "categoryID": {
+    "$oid": "64f8a2c4b2f0b00000000012"
+  },
+  "brandID": {
+    "$oid": "64f8a1b3a1f0a00000000001"
+  },
+  "createdAt": {
+    "$date": "2025-08-05T09:50:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-27T10:58:09.449Z"
+  }
+}]

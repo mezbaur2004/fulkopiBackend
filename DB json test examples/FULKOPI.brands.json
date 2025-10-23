@@ -1,0 +1,63 @@
+[{
+  "_id": {
+    "$oid": "64f8a1b3a1f0a00000000002"
+  },
+  "brandName": "DailyHarvest",
+  "slug": "dailyharvest",
+  "status": false,
+  "brandImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280880/daily_harvest_logo_srwmfw.jpg",
+  "createdAt": {
+    "$date": "2025-08-01T09:11:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-23T05:59:10.680Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a1b3a1f0a00000000004"
+  },
+  "brandName": "FarmPure",
+  "slug": "farm-pure",
+  "status": true,
+  "brandImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280880/images_sye7qz.jpg",
+  "createdAt": {
+    "$date": "2025-08-01T09:13:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a1b3a1f0a00000000005"
+  },
+  "brandName": "NaturesBest",
+  "slug": "natures-best",
+  "status": true,
+  "brandImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280881/natures_best_ltd_logo_x363kw.jpg",
+  "createdAt": {
+    "$date": "2025-08-01T09:14:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a1b3a1f0a00000000003"
+  },
+  "brandName": "GreenLeaf",
+  "slug": "green-leaf",
+  "status": true,
+  "brandImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280880/images_kn6duw.png",
+  "createdAt": {
+    "$date": "2025-08-01T09:12:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a1b3a1f0a00000000001"
+  },
+  "brandName": "FarmFresh",
+  "slug": "farm-fresh",
+  "status": true,
+  "brandImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280882/UWayfNyE-1024x1024_kavfnv.jpg",
+  "createdAt": {
+    "$date": "2025-08-01T09:10:00.000Z"
+  }
+}]
