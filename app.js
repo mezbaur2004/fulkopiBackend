@@ -14,8 +14,10 @@ const mongoose=require('mongoose');
 
 app.use(cookieParser());
 
+const origin=process.env.ORIGIN;
+
 const corsOptions={
-    origin:['http://localhost:5173'],
+    origin:[origin],
     methods:['GET','POST','PUT','DELETE'],
     credentials:false
 }
