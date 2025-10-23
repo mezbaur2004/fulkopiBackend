@@ -14,10 +14,10 @@ const mongoose=require('mongoose');
 
 app.use(cookieParser());
 
-const origin=process.env.ORIGIN;
+const origins=process.env.ORIGIN.split(",");
 
 const corsOptions={
-    origin:[origin],
+    origin:origins,
     methods:['GET','POST','PUT','DELETE'],
     credentials:false
 }
