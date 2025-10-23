@@ -1,0 +1,1190 @@
+{
+	"info": {
+		"_postman_id": "c4f56adc-5efc-423e-b1f5-a7c423197329",
+		"name": "Fulkopi",
+		"description": "Fulkopi is a full-featured e-commerce backend API with user and admin management.  \n  \nUser functionality: Browse products, brands, and categories (read-only), manage a wishlist and shopping cart, and view invoice details for their orders.  \n  \nAdmin functionality: Full CRUD operations for products, brands, and categories, and access to all invoices as well as per-user order details.\n\nThe API is designed for a production-grade setup, supporting authentication, role-based access, and structured endpoints for a scalable e-commerce application.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32470944"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mezbaur2004@gmail.com\",\r\n    \"firstName\":\"Mezbaur Are\",\r\n    \"lastName\":\"Rafi\",\r\n    \"mobile\":\"+8801539316169\",\r\n    \"password\":\"aaaaa1\",\r\n    \"confirmPassword\":\"aaaaa1\",\r\n    \"photo\":\"https://i.postimg.cc/bJHvz2Qf/491356548-679795234547457-6482980502957883213-n.jpg\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}registration",
+							"host": [
+								"{{BaseURL}}registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mezbaur2004@gmail.com\",\r\n    \"password\":\"1111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}login",
+							"host": [
+								"{{BaseURL}}login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profileDetails",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}profiledetails",
+							"host": [
+								"{{BaseURL}}profiledetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProfile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"mezbaur20041@gmail.com\",\r\n    \"firstName\":\"Mezbaur\",\r\n    \"lastName\":\"Are\",\r\n    \"mobile\":\"01518965311\",\r\n    \"password\":\"abc123\",\r\n    \"confirmPassword\":\"abc123\",\r\n    \"photo\":\"https://i.postimg.cc/bJHvz2Qf/491356548-679795234547457-6482980502957883213-n.jpg\",\r\n    \"role\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}profileupdate/68c001e2397ac21e66778a75",
+							"host": [
+								"{{BaseURL}}profileupdate"
+							],
+							"path": [
+								"68c001e2397ac21e66778a75"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GoogleUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMjM0NTY3ODkwIiwic3ViIjoiMTIzNDU2Nzg5MCIsImVtYWlsIjoiZXhhbXBsZUBtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTY5NjYwMDAwMCwiZXhwIjoxNjk2Njg2NDAwfQ.DUMMY_SIGNATURE\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/googleuser",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"googleuser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "brandList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}brandlist?page=1&limit=2",
+							"host": [
+								"{{BaseURL}}brandlist"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categoryList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}categorylist?page=1&limit=4",
+							"host": [
+								"{{BaseURL}}categorylist"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "productList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}productlist?page=2&limit=2",
+							"host": [
+								"{{BaseURL}}productlist"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listByBrand",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}listByBrand/farm-fresh?page=2&limit=2",
+							"host": [
+								"{{BaseURL}}listByBrand"
+							],
+							"path": [
+								"farm-fresh"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listByCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}listByCategory/dairy?page=2&limit=3",
+							"host": [
+								"{{BaseURL}}listByCategory"
+							],
+							"path": [
+								"dairy"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listByKeyword",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}listByKeyword/a?page=1&limit=2",
+							"host": [
+								"{{BaseURL}}listByKeyword"
+							],
+							"path": [
+								"a"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listByRemarks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}listByRemark/Best%20Seller?page=1&limit=2",
+							"host": [
+								"{{BaseURL}}listByRemark"
+							],
+							"path": [
+								"Best%20Seller"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "productDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseURL}}productdetails/potato",
+							"host": [
+								"{{BaseURL}}productdetails"
+							],
+							"path": [
+								"potato"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wish",
+			"item": [
+				{
+					"name": "AddToWishList",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productID\":\"64f8a3d5c3f0c00000000116\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/addwishlist",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"addwishlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WishList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productID\":\"64f8a3d5c3f0c00000000103\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/wishlist",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveWishList",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productID\":\"64f8a3d5c3f0c00000000103\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/removewish",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"removewish"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "AddToCartList",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productID\":\"64f8a3d5c3f0c00000000116\",\r\n    \"qty\":9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/addtocart",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"addtocart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CartList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productID\":\"64f8a3d5c3f0c00000000103\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/cartlist",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"cartlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCartList",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"qty\":158\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/updateCart/68b54968a24e653e0439b348",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"updateCart",
+								"68b54968a24e653e0439b348"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveCartList",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"68b550d78bbab5cf5f3e8212\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/removecart",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"removecart"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "CreateInvoice",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cus_name\":\"Mezbaur Are Rafi\",\r\n    \"cus_location\":\"Adabor 10, Dhaka\",\r\n    \"cus_city\":\"Dhaka\",\r\n    \"cus_phone\":\"01539316169\",\r\n    \"cus_postcode\":\"1227\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/createinvoice",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"createinvoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InvoiceList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cus_name\":\"Mezbaur Are Rafi\",\r\n    \"cus_location\":\"Adabor 10, Dhaka\",\r\n    \"cus_city\":\"Dhaka\",\r\n    \"cus_phone\":\"01539316169\",\r\n    \"cus_postcode\":\"1227\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/invoicelist",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"invoicelist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InvoiceProductList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cus_name\":\"Mezbaur Are Rafi\",\r\n    \"cus_location\":\"Adabor 10, Dhaka\",\r\n    \"cus_city\":\"Dhaka\",\r\n    \"cus_phone\":\"01539316169\",\r\n    \"cus_postcode\":\"1227\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/invoiceproductlist/68b6bd2c782d5b91ca0dfe27",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"invoiceproductlist",
+								"68b6bd2c782d5b91ca0dfe27"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "ProductList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}adminproductlist?page=2&limit=5",
+							"host": [
+								"{{BaseURL}}adminproductlist"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}adminproductdetails/68dce2854eb76308cbe50c3e",
+							"host": [
+								"{{BaseURL}}adminproductdetails"
+							],
+							"path": [
+								"68dce2854eb76308cbe50c3e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"jhgGreen Beanasallll\",\r\n  \"des\": \"Fresh green beans (250g)\",\r\n  \"price\":90,\r\n  \"discount\": false,\r\n  \"discountPrice\":\"\",\r\n  \"status\": true,\r\n  \"image\": \"https://res.cloudinary.com/dwpzofgte/image/upload/v1756281010/Screenshot_2025-08-27_134216_srcu9l.png\",\r\n  \"stock\": true,\r\n  \"remarks\": \"Seasonal\",\r\n  \"categoryID\":\"64f8a2c4b2f0b00000000011\",\r\n  \"brandID\":\"64f8a1b3a1f0a00000000002\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}productcreate",
+							"host": [
+								"{{BaseURL}}productcreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProductUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"wala-wala\",\r\n    \"des\":\"wala walaaaaaaaaaaaaa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/productupdate/68da541a12098d2529e9e56c",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"productupdate",
+								"68da541a12098d2529e9e56c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BrandList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}adminbrandlist?page=1&limit=2",
+							"host": [
+								"{{BaseURL}}adminbrandlist"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BrandDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}adminbranddetails/64f8a1b3a1f0a00000000004",
+							"host": [
+								"{{BaseURL}}adminbranddetails"
+							],
+							"path": [
+								"64f8a1b3a1f0a00000000004"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BrandCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"brandName\": \"DailyHarvestaa\",\r\n  \"status\": true,\r\n  \"brandImg\": \"https://res.cloudinary.com/dwpzofgte/image/upload/v1756280880/daily_harvest_logo_srwmfw.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}brandcreate",
+							"host": [
+								"{{BaseURL}}brandcreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BrandUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"brandName\":\"wala-wala\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/brandupdate/68dab6be68f182b490bd94f9",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"brandupdate",
+								"68dab6be68f182b490bd94f9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CategoryList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}admincategorylist?page=1&limit=2",
+							"host": [
+								"{{BaseURL}}admincategorylist"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CategoryDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}admincategorydetails/64f8a2c4b2f0b00000000014",
+							"host": [
+								"{{BaseURL}}admincategorydetails"
+							],
+							"path": [
+								"64f8a2c4b2f0b00000000014"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CategoryCreate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"categoryName\": \"wala wala\",\r\n  \"status\": true,\r\n  \"categoryImg\": \"https://res.cloudinary.com/dwpzofgte/image/upload/v1756280750/staple-food-crops-to-eat_u4nehu.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}categorycreate",
+							"host": [
+								"{{BaseURL}}categorycreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CategoryUpdate",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryName\":\"wala wala\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/categoryupdate/68dab88a68f182b490bd951f",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"categoryupdate",
+								"68dab88a68f182b490bd951f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}userList?page=1&limit=2",
+							"host": [
+								"{{BaseURL}}userList"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OneUserInvoiceList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}oneuserinvoicelist/68ad5c2445a068b2a55a936e",
+							"host": [
+								"{{BaseURL}}oneuserinvoicelist"
+							],
+							"path": [
+								"68ad5c2445a068b2a55a936e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UserInvoiceList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}userinvoicelist?page=2&limit=2",
+							"host": [
+								"{{BaseURL}}userinvoicelist"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InvoiceProductList",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BaseURL}}invoiceproducts/68b6ca71caeff0516551c9a8",
+							"host": [
+								"{{BaseURL}}invoiceproducts"
+							],
+							"path": [
+								"68b6ca71caeff0516551c9a8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "http://localhost:3030/api/"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lemJhdXIyMDA0QGdtYWlsLmNvbSIsInVzZXJfaWQiOiI2OGFkNWMyNDQ1YTA2OGIyYTU1YTkzNmUiLCJpYXQiOjE3NTY2NDE4NTIsImV4cCI6MTc1OTIzMzg1Mn0.0StZ7EIyp2kUhhhfJ6qPJmdPbjpdtRb8YH5Qs-KGV1U"
+		}
+	]
+}

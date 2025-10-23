@@ -1,0 +1,63 @@
+[{
+  "_id": {
+    "$oid": "64f8a2c4b2f0b00000000015"
+  },
+  "categoryName": "Staples",
+  "slug": "staples",
+  "status": true,
+  "categoryImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280750/staple-food-crops-to-eat_u4nehu.jpg",
+  "createdAt": {
+    "$date": "2025-08-01T10:04:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a2c4b2f0b00000000013"
+  },
+  "categoryName": "Meat & Eggs",
+  "slug": "meat-and-eggs",
+  "status": false,
+  "categoryImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280750/istockphoto-505803876-612x612_tfp2q3.jpg",
+  "createdAt": {
+    "$date": "2025-08-01T10:02:00.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-23T05:59:29.004Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a2c4b2f0b00000000011"
+  },
+  "categoryName": "Vegetables",
+  "slug": "vegetables",
+  "status": true,
+  "categoryImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280750/1658311473_mixvegetable_zzmkmb.jpg",
+  "createdAt": {
+    "$date": "2025-08-01T10:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a2c4b2f0b00000000012"
+  },
+  "categoryName": "Fruits",
+  "slug": "fruits",
+  "status": true,
+  "categoryImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280751/Screenshot_2025-08-27_133802_wfq6pt.png",
+  "createdAt": {
+    "$date": "2025-08-01T10:01:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "64f8a2c4b2f0b00000000014"
+  },
+  "categoryName": "Dairy",
+  "slug": "dairy",
+  "status": true,
+  "categoryImg": "https://res.cloudinary.com/dwpzofgte/image/upload/v1756280750/images_vtfprv.jpg",
+  "createdAt": {
+    "$date": "2025-08-01T10:03:00.000Z"
+  }
+}]
