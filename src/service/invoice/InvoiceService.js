@@ -8,7 +8,6 @@ const productModel=require('../../model/productModel')
 const brandModel=require('../../model/brandModel')
 const categoryModel=require('../../model/categoryModel')
 require('dotenv').config();
-const PORT=process.env.PORT;
 const generateTranId = () => "INV_" + Date.now();
 
 const CreateInvoiceService=async (req,res)=>{
@@ -96,9 +95,9 @@ const CreateInvoiceService=async (req,res)=>{
             total_amount: invoice.total,
             currency: "BDT",
             tran_id: invoice.tran_id,
-            success_url: `http://localhost:${PORT}/api/paymentSuccess`,
-            fail_url: `http://localhost:${PORT}/api/paymentFail`,
-            cancel_url: `http://localhost:${PORT}/api/paymentCancel`,
+            success_url: `https://fulkopi-backend.onrender.com/api/paymentSuccess`,
+            fail_url: `https://fulkopi-backend.onrender.com/api/paymentFail`,
+            cancel_url: `https://fulkopi-backend.onrender.com/api/paymentCancel`,
             product_name:"raw food",
             product_category: "grocery",
             product_profile:"general",
