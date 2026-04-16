@@ -14,15 +14,34 @@ const mongoose=require('mongoose');
 
 app.use(cookieParser());
 
-const origins=process.env.ORIGIN.split(",");
+const origins=process.env.ORIGIN.split(",").map(o => o.trim().replace(/\/$/, "")) ?? [];
 
-const corsOptions={
-    origin:origins,
-    methods:['GET','POST','PUT','DELETE'],
-    credentials:false
-}
+const corsOptions= {
+    origin: function (origin: any, callback: any) {
+        // Allow IPN / Server-to-Server
+        if (!origin) return callback(null, true);
+
+        const cleanOrigin = origin.replace(/\/$/, "");
+
+        // Match your list OR any SSLCommerz domain
+        if (origins.includes(cleanOrigin) || origin.includes("sslcommerz.com")) {
+            return callback(null, true);
+        }
+
+        // IMPORTANT: Use (null, false) instead of (new Error)
+        // This stops the server from crashing and just denies the origin.
+        return callback(null, false);
+    },
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false
+};
 
 app.use(cors(corsOptions));
+
+
+// Handle preflight for all routes
+app.options(/^(.*)$/, cors(corsOptions));
 
 app.use(helmet({
     contentSecurityPolicy: false,
