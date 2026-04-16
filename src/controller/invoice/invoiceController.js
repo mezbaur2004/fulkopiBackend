@@ -2,7 +2,7 @@ const {CreateInvoiceService, PaymentSuccessService, PaymentCancelService, Paymen
     InvoiceListService, InvoiceProductListService
 }=require('../../service/invoice/InvoiceService')
 
-const FrontendURL=(process.env.ORIGIN).split(',')[0];
+const FrontendURL=process.env.FRONTEND_URL;
 
 exports.CreateInvoice=async (req,res)=>{
     let result=await CreateInvoiceService(req);
