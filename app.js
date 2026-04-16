@@ -16,8 +16,8 @@ app.use(cookieParser());
 
 const origins=process.env.ORIGIN.split(",").map(o => o.trim().replace(/\/$/, "")) ?? [];
 
-const corsOptions= {
-    origin: function (origin: any, callback: any) {
+const corsOptions = {
+    origin: function (origin, callback) {
         // Allow IPN / Server-to-Server
         if (!origin) return callback(null, true);
 
@@ -28,8 +28,7 @@ const corsOptions= {
             return callback(null, true);
         }
 
-        // IMPORTANT: Use (null, false) instead of (new Error)
-        // This stops the server from crashing and just denies the origin.
+        // Deny other origins safely
         return callback(null, false);
     },
     methods: ["GET", "POST", "OPTIONS"],
