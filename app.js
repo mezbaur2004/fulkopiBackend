@@ -18,21 +18,18 @@ const origins=process.env.ORIGIN.split(",").map(o => o.trim().replace(/\/$/, "")
 
 const corsOptions = {
     origin: function (origin, callback) {
-        // Allow IPN / Server-to-Server
         if (!origin) return callback(null, true);
 
         const cleanOrigin = origin.replace(/\/$/, "");
 
-        // Match your list OR any SSLCommerz domain
         if (origins.includes(cleanOrigin) || origin.includes("sslcommerz.com")) {
             return callback(null, true);
         }
 
-        // Deny other origins safely
         return callback(null, false);
     },
     methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"], // <-- FIX
     credentials: false
 };
 
