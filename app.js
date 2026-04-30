@@ -28,7 +28,7 @@ const corsOptions = {
 
         return callback(null, false);
     },
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "token"], // <-- FIX
     credentials: false
 };
