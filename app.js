@@ -1,5 +1,6 @@
 const express =require('express');
 const app= new express();
+app.set('trust proxy', 1);
 const router =require('./src/route/api');
 require('dotenv').config();
 
@@ -50,7 +51,10 @@ app.use(express.urlencoded({ limit: '1mb', extended: true }));
 app.use(express.json({ limit: '1mb' }));
 
 const limiter= rateLimit({windowMs:60*1000,max:200, message:"Too many requests. Try again later"})
-app.use(limiter);
+app.use((req, res, next) => {
+    if (req.path.includes("payment")) return next();
+    limiter(req, res, next);
+});
 
 let URL=process.env.URL;
 let option={user:'',pass:"",autoIndex:true};
