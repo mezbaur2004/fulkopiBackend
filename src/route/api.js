@@ -16,11 +16,6 @@ const {RegistrationValidator} = require("../validators/RegistrationValidator");
 
 const router=express.Router();
 
-router.use((req, res, next) => {
-    console.log("GLOBAL HIT:", req.method, req.originalUrl);
-    next();
-});
-
 //User
 router.post("/registration",rateLimitMiddleware,RegistrationValidator,ValidationMiddleware,userController.Registration);
 router.post("/login",rateLimitMiddleware,userController.Login);
