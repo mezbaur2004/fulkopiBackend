@@ -164,7 +164,7 @@ const PaymentSuccessService=async(req)=>{
         let {tran_id}=req.body
         await invoiceModel.updateOne({tran_id:tran_id},{paymentStatus:"success"});
         console.log("BODY:", req.body);
-console.log("QUERY:", req.query);
+        console.log("QUERY:", req.query);
 
         return {status:"success"}
     }catch(error){
