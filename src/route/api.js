@@ -46,10 +46,10 @@ router.delete('/removeCart',AuthMiddleware,cartListController.RemoveCartList);
 //Invoice
 router.post('/createInvoice',AuthMiddleware,invoiceController.CreateInvoice);
 
-router.post('/PaymentSuccess',invoiceController.PaymentSuccess);
-router.post('/PaymentCancel',invoiceController.PaymentCancel);
-router.post('/PaymentFail',invoiceController.PaymentFail);
-router.post('/PaymentIPN',invoiceController.paymentIPN);
+router.post('/paymentSuccess',invoiceController.PaymentSuccess);
+router.post('/paymentCancel',invoiceController.PaymentCancel);
+router.post('/paymentFail',invoiceController.PaymentFail);
+router.post('/paymentIPN',invoiceController.paymentIPN);
 
 router.get('/InvoiceList',AuthMiddleware,invoiceController.invoiceList);
 router.get('/InvoiceProductList/:invoice_id',AuthMiddleware,invoiceController.invoiceProductList);
