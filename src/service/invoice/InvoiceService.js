@@ -53,10 +53,10 @@ const CreateInvoiceService=async (req,res)=>{
                 continue
             }
             let price;
-            if(!product.discount===true){
-                price=product.price;
-            }else{
+            if(product.discount===true && product.discountPrice){
                 price=product.discountPrice;
+            }else{
+                price=product.price;
             }
             let subtotal=price*item.qty;
             //._doc converts mongoose document into plain JavaScript object
@@ -108,8 +108,6 @@ const CreateInvoiceService=async (req,res)=>{
             shipping_method: "NO",
             num_of_item:1,
             weight_of_items:5,
-            logistic_pickup_id:"11233fulkopiaddressblahblah",
-            logistic_delivery_type:"COD",
             cus_add1: invoice.location,
             cus_city: cus_city,
             cus_postcode:cus_postcode,
