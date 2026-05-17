@@ -30,7 +30,7 @@ const corsOptions = {
         return callback(null, false);
     },
     methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization", "token"], // <-- FIX
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
     credentials: false
 };
 
@@ -50,10 +50,15 @@ app.use(hpp());
 app.use(express.urlencoded({ limit: '1mb', extended: true }));
 app.use(express.json({ limit: '1mb' }));
 
-const limiter= rateLimit({windowMs:60*1000,max:200, message:"Too many requests. Try again later"})
+const limiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 200,
+    message: "Too many requests. Try again later"
+});
+
 app.use((req, res, next) => {
-    if (req.path.includes("payment")) return next();
-    limiter(req, res, next);
+    if (req.originalUrl.includes("/payment")) return next();
+    return limiter(req, res, next);
 });
 
 let URL=process.env.URL;
