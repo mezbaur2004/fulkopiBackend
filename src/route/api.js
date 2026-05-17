@@ -46,7 +46,10 @@ router.delete('/removeCart',AuthMiddleware,cartListController.RemoveCartList);
 //Invoice
 router.post('/createInvoice',AuthMiddleware,invoiceController.CreateInvoice);
 
-router.all('/paymentSuccess',invoiceController.PaymentSuccess);
+router.all("/paymentSuccess", (req, res, next) => {
+    console.log("ROUTE HIT");
+    next();
+}, invoiceController.PaymentSuccess);
 router.all('/paymentCancel',invoiceController.PaymentCancel);
 router.all('/paymentFail',invoiceController.PaymentFail);
 router.all('/paymentIPN',invoiceController.paymentIPN);
