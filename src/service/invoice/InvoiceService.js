@@ -92,7 +92,7 @@ const CreateInvoiceService=async (req,res)=>{
         const paymentData = {
             store_id: process.env.STORE_ID,
             store_passwd: process.env.STORE_PASSWORD,
-            total_amount: invoice.total,
+            total_amount: Number(invoice.total).toFixed(2)
             currency: "BDT",
             tran_id: invoice.tran_id,
             success_url: `https://fulkopi-backend.onrender.com/api/paymentSuccess`,
