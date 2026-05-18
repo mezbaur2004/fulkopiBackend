@@ -212,7 +212,7 @@ const PaymentIPNService = async (req) => {
 
         // Step 4: All checks passed — mark as success
         await invoiceModel.updateOne({ tran_id }, { paymentStatus: "success" });
-        console.log("IPN: payment confirmed for tran_id →", tran_id);
+        //console.log("IPN: payment confirmed for tran_id →", tran_id);
 
         return { status: "success" };
     } catch (error) {
