@@ -25,11 +25,10 @@ exports.PaymentFail=async (req,res)=>{
     return res.redirect(`${FrontendURL}/orders`);
 }
 
-exports.paymentIPN=async (req,res)=>{
-    let result=await PaymentIPNService(req);
-    return res.redirect(`${FrontendURL}/orders`);
+exports.paymentIPN = async (req, res) => {
+    let result = await PaymentIPNService(req);
+    return res.status(200).json(result);
 }
-
 exports.invoiceList=async (req,res)=>{
     let result=await InvoiceListService(req);
     return res.status(200).json(result);
