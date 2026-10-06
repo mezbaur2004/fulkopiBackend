@@ -2,7 +2,7 @@
 
 This is the backend for **Fulkopi**, a MERN-stack e-commerce app with secure Google OAuth, custom login, and SSLCommerz payment integration. The backend is built with **Express.js** and **MongoDB**, using **Express-Validator** for reliable API validation and data integrity.
 
-It is production-ready and deployable with **Docker**, connecting seamlessly with the React + Redux frontend.
+It serves the React + Redux frontend and includes a Dockerfile for container deployment.
 
 ## ✨ Features
 
@@ -47,11 +47,13 @@ cd fulkopiBackend
 npm install
 ```
 
-3. Run the server in development mode:
+3. Run the server in development mode (restarts on file changes):
 
 ```
 npm run dev
 ```
+
+   Or run it once with `npm start`.
 
 The server will start on the port set in `.env` (default `8080`). Open your frontend or a tool like Postman to test endpoints.
 
@@ -71,7 +73,6 @@ fulkopiBackend/
 ├─ app.js             # Express app setup
 ├─ index.js           # Server entry point
 ├─ Dockerfile         # Docker configuration
-├─ .env               # Environment variables
 ├─ package.json
 └─ README.md
 ```
